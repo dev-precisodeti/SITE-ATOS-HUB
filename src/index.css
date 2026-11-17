@@ -1,0 +1,29 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root { color-scheme: light; }
+html { scroll-behavior: smooth; }
+body { @apply bg-white text-ink font-sans antialiased; font-weight: 400; }
+h1, h2, h3 { text-wrap: balance; }
+:focus-visible { outline: 2px solid #121317; outline-offset: 3px; border-radius: 8px; }
+
+@layer components {
+  .btn-dark { @apply inline-flex items-center gap-2 rounded-full bg-ink px-6 py-3 text-[15px] font-medium text-white transition hover:bg-black hover:shadow-lg; }
+  .btn-light { @apply inline-flex items-center gap-2 rounded-full bg-surface px-6 py-3 text-[15px] font-medium text-ink transition hover:bg-line; }
+  .eyebrow { @apply font-mono text-[12px] uppercase tracking-[0.14em] text-muted; }
+  .h-display { @apply font-normal tracking-tightest text-ink; font-weight: 450; }
+  .bloom { background:
+      radial-gradient(40% 50% at 15% 20%, #FFE7BF 0%, transparent 70%),
+      radial-gradient(45% 55% at 85% 25%, #DCE9FF 0%, transparent 70%),
+      radial-gradient(45% 55% at 30% 90%, #D4F5E6 0%, transparent 70%),
+      radial-gradient(40% 50% at 85% 85%, #EDE4FF 0%, transparent 70%),
+      #F7F8FA; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
+}
+
+@keyframes pulse-dot { 0%,100% { box-shadow: 0 0 0 0 rgba(31,175,122,.55); } 70% { box-shadow: 0 0 0 7px rgba(31,175,122,0); } }
+.live-dot { animation: pulse-dot 1.8s ease-out infinite; }
