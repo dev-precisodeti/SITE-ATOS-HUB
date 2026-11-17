@@ -15,3 +15,23 @@ export const VIDEOS = {
 
 // Mensagem que já vem escrita quando a pessoa clica em "Falar no WhatsApp"
 export const MENSAGEM_WHATSAPP = "Olá! Vim pelo site e quero conhecer o Atos Hub.";
+
+// Ecossistema de produtos
+export const NOSSOS_PRODUTOS = [
+  {
+    nome: "PREDETI ERP",
+    url: "https://predeti.com.br",
+    desc: "Gestão administrativa e financeira",
+  },
+  {
+    nome: "ATOS DESK",
+    url: "https://atosdesk.predeti.com.br",
+    desc: "Atendimento no WhatsApp, Kanban e IA",
+  },
+  {
+    nome: "ATOS HUB",
+    url: "https://atoshub.predeti.com.br",
+    desc: "Cuidado com pessoas e células",
+    atual: true,
+  },
+];

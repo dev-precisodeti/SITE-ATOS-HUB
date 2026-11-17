@@ -4,7 +4,7 @@ import Particles from "./Particles.jsx";
 import { AppWindow, GuardiaoSim, CelulasLiveSim, VisitanteSim, Mini } from "./Sims.jsx";
 import { Arrow, Icons, MediaSlot, Reveal, LogoMark, WhatsIcon, waLink } from "./UI.jsx";
 import { PILARES_CARTOES, PERFIS, PROTECAO } from "../data.js";
-import { WHATSAPP_VENDAS } from "../config.js";
+import { WHATSAPP_VENDAS, NOSSOS_PRODUTOS } from "../config.js";
 
 /* ================= HERÓI ================= */
 function Hero() {
@@ -12,11 +12,11 @@ function Hero() {
     <section className="relative overflow-hidden pb-10 pt-36 md:pt-44">
       <Particles />
       <div className="relative mx-auto max-w-5xl px-5 text-center">
-        <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}
-          className="mx-auto mb-6 inline-flex items-center gap-2 text-[15px] text-muted">
+        <motion.a href="https://atoshub.predeti.com.br" initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}
+          className="mx-auto mb-6 inline-flex items-center gap-2 text-[15px] text-muted transition hover:text-ink">
           <LogoMark className="h-6 w-6" />
           ATOS HUB
-        </motion.div>
+        </motion.a>
         <motion.h1 initial={{ opacity: 0, y: 24, filter: "blur(8px)" }} animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
           transition={{ duration: 0.9, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
           className="h-display text-[clamp(38px,6.4vw,76px)] leading-[1.04]">
@@ -24,7 +24,7 @@ function Hero() {
         </motion.h1>
         <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.45, duration: 0.8 }}
           className="mx-auto mt-6 max-w-2xl text-[18px] leading-relaxed text-muted">
-          Atos Hub é o sistema de cuidado com pessoas para igrejas em células. Você acompanha cada membro, cada visitante e cada voluntário em um só lugar, do primeiro contato à vida em comunidade.
+          <a href="https://atoshub.predeti.com.br" className="font-medium text-ink underline-offset-4 hover:underline">Atos Hub</a> é o sistema de cuidado com pessoas para igrejas em células. Você acompanha cada membro, cada visitante e cada voluntário em um só lugar, do primeiro contato à vida em comunidade.
         </motion.p>
         <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.6, duration: 0.7 }}
           className="mx-auto mt-10 inline-flex flex-col items-center gap-4 rounded-3xl bg-white/70 p-3 ring-1 ring-line backdrop-blur sm:flex-row">
@@ -148,7 +148,7 @@ function Pilares() {
         <CelulasLiveSim />
       </Feature>
       <Feature id="visitantes" videoKey="visitantes" eyebrow="Novos visitantes" title="Do primeiro “olá” à célula"
-        text="Quem chega quer encontrar uma célula perto de casa. O Atos Hub conecta o visitante ao líder certo e mostra quanto tempo ele está esperando pelo primeiro contato."
+        text={<>Quem chega quer encontrar uma célula perto de casa. O <a href="https://atoshub.predeti.com.br" className="font-medium text-ink underline-offset-4 hover:underline">Atos Hub</a> conecta o visitante ao líder certo e mostra quanto tempo ele está esperando pelo primeiro contato.</>}
         bullets={["Sugestão de células próximas da casa do visitante", "Líder avisado na hora, com os dados de quem chegou", "Tempo até o primeiro contato sempre à vista"]}>
         <VisitanteSim />
       </Feature>
@@ -254,7 +254,7 @@ function Confianca() {
           <Reveal>
             <span className="font-mono text-[12px] uppercase tracking-[0.14em] text-white/60">Confiança</span>
             <h2 className="mt-4 text-[clamp(32px,4.2vw,52px)] leading-[1.06] tracking-tightest" style={{ fontWeight: 450 }}>Cuidar também é proteger</h2>
-            <p className="mt-5 max-w-md text-[17px] leading-relaxed text-white/70">Dados de pessoas são sagrados. O Atos Hub tem níveis de acesso por função, auditoria e recursos de adequação à LGPD, para que cada informação seja vista só por quem precisa.</p>
+            <p className="mt-5 max-w-md text-[17px] leading-relaxed text-white/70">Dados de pessoas são sagrados. O <a href="https://atoshub.predeti.com.br" className="font-medium text-white underline-offset-4 hover:underline">Atos Hub</a> tem níveis de acesso por função, auditoria e recursos de adequação à LGPD, para que cada informação seja vista só por quem precisa.</p>
             <ul className="mt-8 grid gap-4">
               {PROTECAO.map((x) => {
                 const C = Icons[x.i];
@@ -348,6 +348,46 @@ function Formulario() {
   );
 }
 
+/* ================= NOSSOS PRODUTOS ================= */
+function NossosProdutos() {
+  return (
+    <section id="nossos-produtos" className="scroll-mt-24 px-5 pb-24">
+      <div className="mx-auto max-w-6xl">
+        <Reveal className="mx-auto max-w-3xl text-center">
+          <span className="eyebrow">Ecossistema PREDETI</span>
+          <h2 className="h-display mt-4 text-[clamp(28px,4vw,48px)] leading-[1.08]">Nossos produtos</h2>
+          <p className="mx-auto mt-4 max-w-xl text-[16.5px] text-muted">Conheça as plataformas conectadas ao ecossistema <a href="https://predeti.com.br" target="_blank" rel="noopener noreferrer" className="font-medium text-ink underline-offset-4 hover:underline">PREDETI ERP</a>, <a href="https://atosdesk.predeti.com.br" target="_blank" rel="noopener noreferrer" className="font-medium text-ink underline-offset-4 hover:underline">ATOS DESK</a> e <a href="https://atoshub.predeti.com.br" className="font-medium text-ink underline-offset-4 hover:underline">ATOS HUB</a>.</p>
+        </Reveal>
+        <div className="mt-10 grid gap-4 md:grid-cols-3">
+          {NOSSOS_PRODUTOS.map((p, k) => (
+            <Reveal key={p.nome} delay={k * 0.06}>
+              <motion.a
+                whileHover={{ y: -4 }}
+                href={p.url}
+                target={p.atual ? "_self" : "_blank"}
+                rel="noopener noreferrer"
+                className="group flex h-full flex-col justify-between rounded-3xl bg-surface p-6 ring-1 ring-line transition hover:bg-white hover:shadow-[0_20px_50px_-24px_rgba(18,19,23,.3)]"
+              >
+                <div>
+                  <div className="flex items-center justify-between gap-2">
+                    <span className="text-[19px] font-medium text-ink">{p.nome}</span>
+                    {p.atual && <span className="rounded-full bg-ink px-2.5 py-0.5 font-mono text-[10.5px] text-white">Você está aqui</span>}
+                  </div>
+                  <p className="mt-2 text-[15px] leading-relaxed text-muted">{p.desc}</p>
+                </div>
+                <span className="mt-6 inline-flex items-center gap-1.5 text-[14px] font-medium text-ink">
+                  {p.url.replace(/^https?:\/\//, "")}
+                  <Arrow className="h-4 w-4 transition group-hover:translate-x-1" />
+                </span>
+              </motion.a>
+            </Reveal>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
 function ChamadaFinal() {
   return (
     <section id="demonstracao" className="scroll-mt-20 px-5 pb-24">
@@ -355,7 +395,7 @@ function ChamadaFinal() {
         <Reveal>
           <span className="eyebrow">Demonstração</span>
           <h2 className="h-display mt-4 text-[clamp(32px,4.2vw,52px)] leading-[1.06]">Sua igreja tem muitas pessoas. Cada uma delas importa.</h2>
-          <p className="mt-5 max-w-md text-[17px] leading-relaxed text-muted">Veja como o Atos Hub ajuda sua igreja a cuidar de todos, do primeiro visitante ao líder mais experiente.</p>
+          <p className="mt-5 max-w-md text-[17px] leading-relaxed text-muted">Veja como o <a href="https://atoshub.predeti.com.br" className="font-medium text-ink underline-offset-4 hover:underline">Atos Hub</a> ajuda sua igreja a cuidar de todos, do primeiro visitante ao líder mais experiente.</p>
           <ul className="mt-8 grid gap-3 text-[15px]">
             {["Uma conversa de 20 minutos, no horário da sua igreja", "Demonstração com a estrutura de células e redes de vocês", "Caminho de implantação acompanhado pela nossa equipe"].map((t) => (
               <li key={t} className="flex gap-3"><Icons.check className="mt-0.5 h-5 w-5 flex-none text-mint" />{t}</li>
@@ -378,6 +418,7 @@ export default function Home() {
       <Pilares />
       <ParaQuem />
       <Confianca />
+      <NossosProdutos />
       <ChamadaFinal />
     </main>
   );

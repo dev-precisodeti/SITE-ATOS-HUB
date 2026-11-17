@@ -205,7 +205,7 @@ export function AppWindow({ paused }) {
   return (
     <div className="relative grid h-full w-full grid-cols-[52px_1fr] overflow-hidden rounded-2xl bg-white text-ink shadow-2xl ring-1 ring-black/5 md:grid-cols-[176px_1fr]">
       <div className="flex flex-col gap-1 border-r border-line bg-surface p-2 md:p-3">
-        <div className="mb-2 flex items-center gap-2 px-1"><LogoMark className="h-7 w-7" /><span className="hidden text-[13px] font-medium md:inline">ATOS <span className="text-muted">HUB</span></span></div>
+        <a href="https://atoshub.predeti.com.br" className="mb-2 flex items-center gap-2 px-1 transition hover:opacity-80"><LogoMark className="h-7 w-7" /><span className="hidden text-[13px] font-medium md:inline">ATOS <span className="text-muted">HUB</span></span></a>
         {menu.map(([i, t], k) => {
           const C = Icons[i];
           return (
