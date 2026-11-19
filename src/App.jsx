@@ -18,7 +18,14 @@ function useHashScroll() {
   }, []);
 }
 
-const LINKS = [["O cuidado", "#cuidado"], ["Pilares", "#pilares"], ["Células", "#celulas"], ["Para quem é", "#para-quem"], ["Segurança", "#seguranca"]];
+const LINKS = [
+  ["O cuidado", "#cuidado"],
+  ["Pilares", "#pilares"],
+  ["Células", "#celulas"],
+  ["Voluntariado", "#voluntariado"],
+  ["Para quem é", "#para-quem"],
+  ["Segurança", "#seguranca"],
+];
 
 function Nav() {
   const [solid, setSolid] = useState(false);
@@ -207,7 +214,7 @@ function Footer() {
           </div>
         </div>
         {[
-          ["Pilares", [["Guardiões", "#guardioes"], ["Células", "#celulas"], ["Novos visitantes", "#visitantes"], ["Voluntariado, cultos e Kids", "#pilares"]]],
+          ["Pilares", [["Cuidado", "#cuidado"], ["Células", "#celulas"], ["Voluntariado", "#voluntariado"], ["Novos visitantes", "#visitantes"]]],
           ["Igreja", [["Para quem é", "#para-quem"], ["Segurança e LGPD", "#seguranca"]]],
           ["ATOS HUB", [["Início", "#inicio"], ["Demonstração", "#demonstracao"]]],
           ["Nossos produtos", NOSSOS_PRODUTOS.map((p) => [p.nome, p.url, !p.atual])],

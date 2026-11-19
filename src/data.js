@@ -21,7 +21,7 @@ export const CELULAS = [
   { nome: "Célula Universitários", lider: "Felipe", rede: "Rede Azul", total: 11, cor: "#EF5A4C" },
 ];
 
-// Pessoas sob o cuidado de um guardião
+// Pessoas sob o acompanhamento do cuidado pastoral
 export const CUIDADO = [
   { nome: "Ana Paula Costa", st: "ok", txt: "Presente na célula esta semana" },
   { nome: "Daniel Souza", st: "atencao", txt: "Faltou 2 encontros seguidos" },
@@ -50,7 +50,7 @@ export const PILARES_CARTOES = [
   },
   {
     i: "kids", t: "Kids", s: "Segurança para as famílias",
-    d: "Os ministérios infantis são organizados em um ambiente seguro, e pais e responsáveis acompanham tudo pelo Portal do Guardião.",
+    d: "Os ministérios infantis são organizados em um ambiente seguro, e pais e responsáveis acompanham tudo pelo Portal da Família.",
     mini: "kids",
   },
   {
@@ -63,32 +63,32 @@ export const PILARES_CARTOES = [
 export const PERFIS = [
   {
     t: "Pastores e conselhos", d: "A visão da igreja inteira, de todas as sedes e redes.",
-    painel: "Visão da igreja",
-    itens: [["Sedes", "3"], ["Redes", "12"], ["Células ativas", "214"], ["Presença na semana", "81%"]],
+    painel: "Dashboard de Insights · Geral",
+    itens: [["Sedes", "3"], ["Redes", "8"], ["Células ativas", "1.042"], ["Presença na semana", "86%"]],
     grad: "from-[#FFE7BF] via-[#FFF6E6] to-[#DCE9FF]",
   },
   {
     t: "Coordenadores e supervisores", d: "Acompanham redes, núcleos e lideranças sem perder detalhes.",
-    painel: "Rede Verde · 18 células",
-    itens: [["Células que se reuniram", "16/18"], ["Líderes em formação", "5"], ["Núcleos de cuidado", "6"], ["Pessoas afastadas", "9"]],
+    painel: "SLA e Qualidade de Atendimento · Leads",
+    itens: [["SLA Médio", "18h"], ["Leads aguardando", "28"], ["Células ativas", "214"], ["Novos membros/mês", "268"]],
     grad: "from-[#D4F5E6] via-[#F2FBF6] to-[#DCE9FF]",
   },
   {
     t: "Líderes de célula", d: "Sabem quem está chegando, quem faltou e quem precisa de uma visita.",
-    painel: "Célula Família Lima",
-    itens: [["Visitantes chegando", "2"], ["Faltaram hoje", "Daniel, Felipe"], ["Precisa de visita", "Larissa"], ["Próximo encontro", "Qui · 20h"]],
+    painel: "Gestão do Líder · Célula Conexão",
+    itens: [["Solicitações", "2 pendentes"], ["Roteiros ativos", "4 disponíveis"], ["Encontro", "Sexta · 20h"], ["Membros", "14 frequentes"]],
     grad: "from-[#EDE4FF] via-[#F7F3FF] to-[#FFE7BF]",
   },
   {
     t: "Membros e famílias", d: "Encontram sua célula, seu ministério e seu lugar.",
-    painel: "Olá, Ana Paula",
-    itens: [["Sua célula", "Jovens Méier"], ["Seu guardião", "Juliana"], ["Você serve em", "Recepção · Dom 10h"], ["Kids", "Check-in do Pedro"]],
+    painel: "Portal do Membro & Família",
+    itens: [["Sua célula", "Conexão de Vida"], ["Ministério", "Voluntariado"], ["Kids", "QR Entrada Ativo"], ["Cursos", "Em andamento"]],
     grad: "from-[#DCE9FF] via-[#F2F6FF] to-[#D4F5E6]",
   },
 ];
 
 export const PROTECAO = [
-  { i: "lock", t: "Níveis de acesso por função", d: "Pastor, supervisor, líder e guardião enxergam só o que precisam para cuidar." },
+  { i: "lock", t: "Níveis de acesso por função", d: "Pastor, supervisor, líder e equipe de cuidado enxergam só o que precisam para cuidar." },
   { i: "history", t: "Auditoria", d: "Registro de quem acessou e alterou cada informação, e quando." },
   { i: "shield", t: "Adequação à LGPD", d: "Recursos para consentimento, correção e exclusão de dados pessoais." },
 ];

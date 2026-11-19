@@ -1,27 +1,32 @@
 import { motion } from "framer-motion";
 import { VIDEOS, WHATSAPP_VENDAS, MENSAGEM_WHATSAPP } from "../config.js";
 
-/* Marca ATOS HUB: um "A" formado por pessoas (os pontos) e conexões (as linhas).
-   No centro, o hub âmbar liga todo mundo — ninguém fica sem conexão. */
+/* Marca ATOS HUB: logotipo e símbolo oficiais com selo laranja (#F26A21) */
 export function LogoMark({ className = "h-7 w-7", dark = false }) {
-  const box = dark ? "#FFFFFF" : "#121317", fg = dark ? "#121317" : "#FFFFFF";
+  const src = dark
+    ? "/brand/atoshub-selo-laranja-fundo-escuro-transparente.svg"
+    : "/brand/atoshub-selo-laranja-transparente.svg";
   return (
-    <svg viewBox="0 0 32 32" className={className} aria-hidden="true">
-      <path d="M9 1H23A8 8 0 0 1 31 9V20A8 8 0 0 1 23 28H11.5L4.2 31.3C2.6 32 1 31.2 1 29.4V9A8 8 0 0 1 9 1Z" fill={box} />
-      <g transform="translate(0,-1.5)">
-        <path d="M12.3 24.5 18.7 7.5 25.1 24.5" fill="none" stroke={fg} strokeWidth="3.2" strokeLinecap="round" strokeLinejoin="round" />
-        <path d="M22.65 18H6.9" stroke={fg} strokeWidth="3.2" strokeLinecap="round" />
-        <circle cx="6.9" cy="18" r="2.6" fill="#F5A524" />
-      </g>
-    </svg>
+    <img
+      src={src}
+      alt="ATOS HUB"
+      className={`${className} object-contain`}
+      aria-hidden="true"
+    />
   );
 }
 
 export function Logo({ className = "", dark = false }) {
+  const src = dark
+    ? "/brand/atoshub-horizontal-fundo-escuro-transparente.svg"
+    : "/brand/atoshub-horizontal-fundo-claro-transparente.svg";
   return (
-    <a href="#inicio" className={`flex items-center gap-2.5 text-[18px] font-medium tracking-tight ${className}`} aria-label="ATOS HUB, início">
-      <LogoMark className="h-8 w-8" dark={dark} />
-      <span>ATOS <span className="text-muted">HUB</span></span>
+    <a href="#inicio" className={`inline-flex items-center ${className}`} aria-label="ATOS HUB, início">
+      <img
+        src={src}
+        alt="ATOS HUB"
+        className="h-8 w-auto md:h-9"
+      />
     </a>
   );
 }

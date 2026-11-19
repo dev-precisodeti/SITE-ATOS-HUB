@@ -2,7 +2,10 @@ import { useRef, useState } from "react";
 import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion";
 import Particles from "./Particles.jsx";
 import { AppWindow, GuardiaoSim, CelulasLiveSim, VisitanteSim, Mini } from "./Sims.jsx";
+import { VoluntariadoSim } from "./VoluntariadoSim.jsx";
+import { CheckinCelulaSim } from "./CheckinCelulaSim.jsx";
 import { Arrow, Icons, MediaSlot, Reveal, LogoMark, WhatsIcon, waLink } from "./UI.jsx";
+import { PerfilDashboard } from "./PerfisViews.jsx";
 import { PILARES_CARTOES, PERFIS, PROTECAO } from "../data.js";
 import { WHATSAPP_VENDAS, NOSSOS_PRODUTOS } from "../config.js";
 
@@ -105,26 +108,35 @@ function Problema() {
 }
 
 /* ================= PILARES EM SEÇÕES ALTERNADAS ================= */
-function Feature({ eyebrow, title, text, bullets, children, flip, id, videoKey, dark }) {
+function Feature({ eyebrow, title, text, bullets, children, flip, id, videoKey, dark, mobile }) {
   return (
-    <div id={id} className={`mx-auto grid max-w-6xl scroll-mt-24 items-center gap-10 px-5 py-14 md:gap-16 md:py-20 ${flip ? "md:grid-cols-[1.2fr_0.8fr]" : "md:grid-cols-[0.8fr_1.2fr]"}`}>
+    <div id={id} className={`mx-auto grid max-w-6xl scroll-mt-24 items-center gap-10 px-5 py-12 md:gap-14 md:py-16 ${flip ? "md:grid-cols-[1.1fr_0.9fr]" : "md:grid-cols-[0.9fr_1.1fr]"}`}>
       <Reveal className={`text-center md:text-left ${flip ? "md:order-2" : ""}`}>
         <span className="eyebrow">{eyebrow}</span>
         <h3 className="h-display mt-3 text-[clamp(28px,3vw,38px)] leading-tight">{title}</h3>
-        <p className="mx-auto mt-4 max-w-md text-[16.5px] leading-relaxed text-muted md:mx-0">{text}</p>
-        <ul className="mx-auto mt-6 grid max-w-md gap-2 text-left text-[15px] md:mx-0">
+        <p className="mx-auto mt-4 max-w-md text-[16px] leading-relaxed text-muted md:mx-0">{text}</p>
+        <ul className="mx-auto mt-6 grid max-w-md gap-2.5 text-left text-[14.5px] md:mx-0">
           {bullets.map((b) => (
-            <li key={b} className="flex gap-3"><span className="mt-2 h-1.5 w-1.5 flex-none rounded-full bg-amber" />{b}</li>
+            <li key={b} className="flex gap-3"><span className="mt-1.5 h-1.5 w-1.5 flex-none rounded-full bg-amber" />{b}</li>
           ))}
         </ul>
       </Reveal>
-      <Reveal delay={0.1} className={flip ? "md:order-1" : ""}>
-        <div className={`relative aspect-[4/3] overflow-hidden rounded-[28px] p-5 md:p-10 ${dark ? "bg-[#0E0F13]" : "bloom"}`}>
-          {dark && <div className="absolute inset-0 opacity-50" style={{ backgroundImage: "radial-gradient(rgba(255,255,255,.18) 1px, transparent 1px)", backgroundSize: "22px 22px" }} />}
-          <div className="relative h-full overflow-hidden rounded-2xl bg-white shadow-[0_30px_60px_-20px_rgba(18,19,23,.25)] ring-1 ring-black/5">
-            <MediaSlot videoKey={videoKey}>{children}</MediaSlot>
+      <Reveal delay={0.1} className={`flex justify-center ${flip ? "md:order-1" : ""}`}>
+        {mobile ? (
+          <div className="relative w-full max-w-[320px] py-1 flex justify-center">
+            <div className="absolute -inset-4 rounded-[50px] bg-gradient-to-tr from-[#F26A21]/10 to-emerald-500/10 blur-xl pointer-events-none" />
+            <div className="relative w-full">
+              <MediaSlot videoKey={videoKey}>{children}</MediaSlot>
+            </div>
           </div>
-        </div>
+        ) : (
+          <div className={`relative aspect-[4/3] w-full overflow-hidden rounded-[28px] p-5 md:p-10 ${dark ? "bg-[#0E0F13]" : "bloom"}`}>
+            {dark && <div className="absolute inset-0 opacity-50" style={{ backgroundImage: "radial-gradient(rgba(255,255,255,.18) 1px, transparent 1px)", backgroundSize: "22px 22px" }} />}
+            <div className="relative h-full overflow-hidden rounded-2xl bg-white shadow-[0_30px_60px_-20px_rgba(18,19,23,.25)] ring-1 ring-black/5">
+              <MediaSlot videoKey={videoKey}>{children}</MediaSlot>
+            </div>
+          </div>
+        )}
       </Reveal>
     </div>
   );
@@ -137,20 +149,52 @@ function Pilares() {
         <span className="eyebrow">Os pilares</span>
         <h2 className="h-display mt-4 text-[clamp(32px,4.6vw,56px)] leading-[1.06]">Tudo o que o cuidado precisa, em um só lugar</h2>
       </Reveal>
-      <Feature id="guardioes" videoKey="guardioes" eyebrow="Guardiões" title="Cuidado pastoral organizado"
-        text="Cada pessoa tem alguém olhando por ela. Distribua membros entre guardiões e núcleos de cuidado, acompanhe quem precisa de acolhimento e reconecte quem se afastou."
-        bullets={["Membros distribuídos entre guardiões e núcleos de cuidado", "Sinais de quem faltou, quem pediu oração e quem se afastou", "Visitas e reaproximações registradas no caminho de cada pessoa"]}>
+      
+      {/* 1. Cuidado */}
+      <Feature id="cuidado" videoKey="guardioes" eyebrow="Cuidado" title="Cuidado pastoral organizado"
+        text="Cada pessoa tem alguém olhando por ela. Distribua membros entre equipes e núcleos de cuidado, acompanhe quem precisa de acolhimento e reconecte quem se afastou."
+        bullets={["Membros distribuídos entre equipes e núcleos de cuidado", "Sinais de quem faltou, quem pediu oração e quem se afastou", "Visitas e reaproximações registradas no caminho de cada pessoa"]}>
         <GuardiaoSim />
       </Feature>
+
+      {/* 2. Células */}
       <Feature flip dark id="celulas" videoKey="celulas" eyebrow="Células" title="A vida da igreja acontecendo"
         text="Gestão completa de células, redes e lideranças. Acompanhe presença, reuniões e a saúde de cada grupo, inclusive ao vivo, no momento em que as células estão acontecendo."
         bullets={["Células organizadas por rede, supervisão e liderança", "Presença registrada pelo líder durante o encontro", "Saúde de cada grupo: frequência, visitantes e multiplicação"]}>
         <CelulasLiveSim />
       </Feature>
+
+      {/* 3. Novos Visitantes */}
       <Feature id="visitantes" videoKey="visitantes" eyebrow="Novos visitantes" title="Do primeiro “olá” à célula"
         text={<>Quem chega quer encontrar uma célula perto de casa. O <a href="https://atoshub.predeti.com.br" className="font-medium text-ink underline-offset-4 hover:underline">Atos Hub</a> conecta o visitante ao líder certo e mostra quanto tempo ele está esperando pelo primeiro contato.</>}
         bullets={["Sugestão de células próximas da casa do visitante", "Líder avisado na hora, com os dados de quem chegou", "Tempo até o primeiro contato sempre à vista"]}>
         <VisitanteSim />
+      </Feature>
+
+      {/* 4. Check-in de Célula (Vem primeiro conforme solicitado) */}
+      <Feature flip id="checkin-celula" videoKey="checkin-celula" mobile eyebrow="Check-in de Célula"
+        title="O líder registra em segundos. A liderança acompanha na hora."
+        text="Nada de cobrar relatórios no domingo à noite. O líder inicia a reunião com um toque, marca presenças por QR code, reconhecimento facial ou lista manual, e os números sobem na hora para a liderança."
+        bullets={[
+          "Início da reunião com um toque e status ao vivo no app",
+          "Presença por QR Code dinâmico, lista manual ou reconhecimento facial",
+          "Adição rápida de visitantes durante o encontro",
+          "Foto da comunhão e relatório enviado automaticamente para a liderança",
+        ]}>
+        <CheckinCelulaSim />
+      </Feature>
+
+      {/* 5. Voluntariado & Ministérios (Vem em seguida) */}
+      <Feature id="voluntariado" videoKey="voluntariado" mobile eyebrow="Voluntariado"
+        title="Escalas sem planilha. Voluntários sem confusão."
+        text="Cada voluntário vê suas vagas abertas, confirma sua escala e acompanha a ordem do culto direto no celular — sem grupos perdidos no WhatsApp nem planilhas manuais."
+        bullets={[
+          "Vagas abertas com candidatura e confirmação instantânea pelo app",
+          "Check-in do voluntário por QR Code dinâmico ou código no dia do culto",
+          "Sincronização com Google Agenda para ninguém esquecer o dia de servir",
+          "Ordem do culto em tempo real para toda a equipe de apoio, louvor e mídia",
+        ]}>
+        <VoluntariadoSim />
       </Feature>
 
       <div className="mx-auto max-w-6xl px-5 pb-24 pt-6 md:pb-32">
@@ -200,23 +244,20 @@ function ParaQuem() {
           ))}
         </div>
 
-        <div className="mt-10 grid grid-cols-1 items-stretch gap-8 md:grid-cols-[1.4fr_1fr]">
-          <div className={`relative aspect-[4/5] overflow-hidden sm:aspect-[16/11] rounded-[28px] bg-gradient-to-br ${p.grad} p-6 md:p-10`}>
+        <div className="mt-10 grid grid-cols-1 items-stretch gap-8 md:grid-cols-[1.45fr_0.95fr]">
+          <div className={`relative min-h-[440px] overflow-hidden rounded-[28px] bg-gradient-to-br ${p.grad} p-4 sm:p-6 md:p-8 flex flex-col justify-center`}>
             <AnimatePresence mode="wait">
               <motion.div key={p.t} initial={{ opacity: 0, scale: 0.97 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0, scale: 0.97 }}
-                className="flex h-full flex-col overflow-hidden rounded-2xl bg-white/90 shadow-xl ring-1 ring-black/5">
-                <div className="flex items-center justify-between border-b border-line px-5 py-3.5">
-                  <span className="text-[14px] font-medium">{p.painel}</span>
-                  <LogoMark className="h-6 w-6" />
+                className="flex h-full min-h-[380px] flex-col overflow-hidden rounded-2xl bg-white/95 shadow-xl ring-1 ring-black/5">
+                <div className="flex items-center justify-between border-b border-line px-5 py-3">
+                  <div className="flex items-center gap-2">
+                    <span className="h-2 w-2 rounded-full bg-[#F26A21]" />
+                    <span className="text-[13.5px] font-bold text-slate-800">{p.painel}</span>
+                  </div>
+                  <LogoMark className="h-5 w-5" />
                 </div>
-                <div className="grid flex-1 grid-cols-2 gap-2 p-3 md:gap-3 md:p-4">
-                  {p.itens.map(([l, v], k) => (
-                    <motion.div key={l} initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.08 * k }}
-                      className="flex flex-col justify-between rounded-xl bg-surface p-3 md:p-4">
-                      <span className="text-[12px] text-muted">{l}</span>
-                      <span className="mt-2 text-[clamp(15px,2vw,24px)] font-medium leading-tight tracking-tight">{v}</span>
-                    </motion.div>
-                  ))}
+                <div className="flex-1 overflow-hidden">
+                  <PerfilDashboard index={i} />
                 </div>
               </motion.div>
             </AnimatePresence>
@@ -243,8 +284,8 @@ function ParaQuem() {
 
 /* ================= CONFIANÇA ================= */
 function Confianca() {
-  const acessos = [["Pastor", "Igreja inteira"], ["Supervisor", "Sua rede"], ["Líder", "Sua célula"], ["Guardião", "Pessoas sob seu cuidado"]];
-  const log = [["20:14", "Líder Marcos registrou presença · Célula Família Lima"], ["19:52", "Guardiã Sônia atualizou acompanhamento de Felipe A."], ["18:30", "Supervisora Carla exportou relatório da Rede Verde"]];
+  const acessos = [["Pastor", "Igreja inteira"], ["Supervisor", "Sua rede"], ["Líder", "Sua célula"], ["Equipe de Cuidado", "Pessoas sob seu cuidado"]];
+  const log = [["20:14", "Líder Marcos registrou presença · Célula Família Lima"], ["19:52", "Líder de Cuidado Sônia atualizou acompanhamento de Felipe A."], ["18:30", "Supervisora Carla exportou relatório da Rede Verde"]];
   return (
     <section id="seguranca" className="scroll-mt-24 px-5 py-24 md:py-32">
       <div className="relative mx-auto max-w-6xl overflow-hidden rounded-[28px] bg-ink p-8 text-white md:p-14">
