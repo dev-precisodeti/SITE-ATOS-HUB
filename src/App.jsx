@@ -1,21 +1,34 @@
 import { useEffect, useRef, useState } from "react";
 import { motion, AnimatePresence, useScroll, useMotionValueEvent } from "framer-motion";
 import Home from "./components/Home.jsx";
+import { LegalModal, LgpdBanner } from "./components/Legal.jsx";
 import { Logo, Arrow, WhatsIcon, waLink } from "./components/UI.jsx";
-import { WHATSAPP_EXIBIDO, NOSSOS_PRODUTOS } from "./config.js";
+import { WHATSAPP_EXIBIDO, NOSSOS_PRODUTOS, EMPRESA_LEGAL } from "./config.js";
 
-/* Links com #id rolam até a seção; #inicio volta ao topo. */
-function useHashScroll() {
+/* Links com #id rolam até a seção; #inicio volta ao topo; #privacidade, #termos e #lgpd abrem o modal legal. */
+function useHashScroll(onOpenLegal) {
   useEffect(() => {
     const on = () => {
       const id = location.hash.slice(1);
+      if (id === "privacidade" || id === "lgpd") {
+        onOpenLegal("privacidade");
+        return;
+      }
+      if (id === "termos") {
+        onOpenLegal("termos");
+        return;
+      }
+      if (id === "direitos" || id === "dpo") {
+        onOpenLegal("direitos");
+        return;
+      }
       if (!id || id === "inicio") return window.scrollTo({ top: 0, behavior: "smooth" });
       document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
     };
     addEventListener("hashchange", on);
     if (location.hash) setTimeout(on, 150);
     return () => removeEventListener("hashchange", on);
-  }, []);
+  }, [onOpenLegal]);
 }
 
 const LINKS = [
@@ -204,7 +217,7 @@ function BotaoWhatsApp() {
   );
 }
 
-function Footer() {
+function Footer({ onOpenLegal }) {
   return (
     <footer className="overflow-hidden border-t border-line pt-16">
       <div className="mx-auto grid max-w-7xl gap-10 px-5 md:grid-cols-[1.4fr_1fr_1fr_1fr_1fr]">
@@ -236,7 +249,50 @@ function Footer() {
           </div>
         ))}
       </div>
-      <div className="mx-auto mt-14 flex max-w-7xl flex-wrap items-center justify-between gap-4 px-5 text-[13px] text-muted">
+
+      {/* Faixa de transparência jurídica e LGPD */}
+      <div className="mx-auto mt-12 max-w-7xl px-5">
+        <div className="flex flex-wrap items-center justify-between gap-4 rounded-2xl bg-surface px-5 py-4 text-[12.5px] text-muted ring-1 ring-line">
+          <div className="grid gap-0.5">
+            <span className="font-medium text-ink">
+              {EMPRESA_LEGAL.razaoSocial} · CNPJ: {EMPRESA_LEGAL.cnpj}
+            </span>
+            <span>
+              Conformidade com a Lei Geral de Proteção de Dados Pessoais (Lei nº 13.709/2018 — LGPD) · DPO:{" "}
+              <a href={`mailto:${EMPRESA_LEGAL.emailDpo}`} className="underline-offset-2 hover:text-ink hover:underline">
+                {EMPRESA_LEGAL.emailDpo}
+              </a>
+            </span>
+          </div>
+          <div className="flex flex-wrap items-center gap-3">
+            <button
+              type="button"
+              onClick={() => onOpenLegal("privacidade")}
+              className="font-medium text-ink underline-offset-4 hover:underline"
+            >
+              Política de Privacidade (LGPD)
+            </button>
+            <span className="text-line">·</span>
+            <button
+              type="button"
+              onClick={() => onOpenLegal("termos")}
+              className="font-medium text-ink underline-offset-4 hover:underline"
+            >
+              Termos de Uso
+            </button>
+            <span className="text-line">·</span>
+            <button
+              type="button"
+              onClick={() => onOpenLegal("direitos")}
+              className="font-medium text-ink underline-offset-4 hover:underline"
+            >
+              Direitos do Titular (Art. 18)
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div className="mx-auto mt-8 flex max-w-7xl flex-wrap items-center justify-between gap-4 px-5 text-[13px] text-muted">
         <span>© {new Date().getFullYear()} <a href="https://atoshub.predeti.com.br" className="hover:text-ink">ATOS HUB</a> · Soluções <a href="https://predeti.com.br" target="_blank" rel="noopener noreferrer" className="hover:text-ink">PREDETI ERP</a> · Ninguém fica para trás.</span>
         <div className="flex flex-wrap items-center gap-4">
           {NOSSOS_PRODUTOS.map((p) => (
@@ -255,13 +311,16 @@ function Footer() {
 }
 
 export default function App() {
-  useHashScroll();
+  const [legalTab, setLegalTab] = useState(null);
+  useHashScroll(setLegalTab);
   return (
     <div className="min-h-screen w-full max-w-full overflow-x-hidden bg-white">
       <Nav />
       <div id="inicio" />
-      <Home />
-      <Footer />
+      <Home onOpenLegal={setLegalTab} />
+      <Footer onOpenLegal={setLegalTab} />
+      <LgpdBanner onOpenLegal={setLegalTab} />
+      <LegalModal tab={legalTab} onClose={() => setLegalTab(null)} onChangeTab={setLegalTab} />
       <BotaoWhatsApp />
     </div>
   );

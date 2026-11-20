@@ -7,7 +7,7 @@ import { CheckinCelulaSim } from "./CheckinCelulaSim.jsx";
 import { Arrow, Icons, MediaSlot, Reveal, LogoMark, WhatsIcon, waLink } from "./UI.jsx";
 import { PerfilDashboard } from "./PerfisViews.jsx";
 import { PILARES_CARTOES, PERFIS, PROTECAO } from "../data.js";
-import { WHATSAPP_VENDAS, NOSSOS_PRODUTOS } from "../config.js";
+import { WHATSAPP_VENDAS, NOSSOS_PRODUTOS, EMPRESA_LEGAL } from "../config.js";
 
 /* ================= HERÓI ================= */
 function Hero() {
@@ -283,7 +283,7 @@ function ParaQuem() {
 }
 
 /* ================= CONFIANÇA ================= */
-function Confianca() {
+function Confianca({ onOpenLegal }) {
   const acessos = [["Pastor", "Igreja inteira"], ["Supervisor", "Sua rede"], ["Líder", "Sua célula"], ["Equipe de Cuidado", "Pessoas sob seu cuidado"]];
   const log = [["20:14", "Líder Marcos registrou presença · Célula Família Lima"], ["19:52", "Líder de Cuidado Sônia atualizou acompanhamento de Felipe A."], ["18:30", "Supervisora Carla exportou relatório da Rede Verde"]];
   return (
@@ -293,7 +293,7 @@ function Confianca() {
         <div className="absolute inset-0 bg-[radial-gradient(50%_60%_at_85%_100%,rgba(245,165,36,.22),transparent_70%)]" />
         <div className="relative grid grid-cols-1 items-center gap-12 lg:grid-cols-[1fr_1.05fr]">
           <Reveal>
-            <span className="font-mono text-[12px] uppercase tracking-[0.14em] text-white/60">Confiança</span>
+            <span className="font-mono text-[12px] uppercase tracking-[0.14em] text-white/60">Confiança e Conformidade Legal</span>
             <h2 className="mt-4 text-[clamp(32px,4.2vw,52px)] leading-[1.06] tracking-tightest" style={{ fontWeight: 450 }}>Cuidar também é proteger</h2>
             <p className="mt-5 max-w-md text-[17px] leading-relaxed text-white/70">Dados de pessoas são sagrados. O <a href="https://atoshub.predeti.com.br" className="font-medium text-white underline-offset-4 hover:underline">Atos Hub</a> tem níveis de acesso por função, auditoria e recursos de adequação à LGPD, para que cada informação seja vista só por quem precisa.</p>
             <ul className="mt-8 grid gap-4">
@@ -307,6 +307,25 @@ function Confianca() {
                 );
               })}
             </ul>
+            <div className="mt-8 flex flex-wrap items-center gap-3">
+              <button
+                type="button"
+                onClick={() => onOpenLegal?.("privacidade")}
+                className="inline-flex items-center gap-2 rounded-full bg-white/10 px-4 py-2.5 text-[13.5px] font-medium text-white ring-1 ring-white/15 transition hover:bg-white/20"
+              >
+                <Icons.shield className="h-4 w-4 text-amber" /> Política de Privacidade e LGPD
+              </button>
+              <button
+                type="button"
+                onClick={() => onOpenLegal?.("direitos")}
+                className="inline-flex items-center gap-2 rounded-full bg-white/5 px-4 py-2.5 text-[13.5px] text-white/80 ring-1 ring-white/10 transition hover:bg-white/15 hover:text-white"
+              >
+                Canal do Titular (DPO)
+              </button>
+            </div>
+            <p className="mt-3 font-mono text-[11.5px] text-white/50">
+              {EMPRESA_LEGAL.razaoSocial} · CNPJ {EMPRESA_LEGAL.cnpj}
+            </p>
           </Reveal>
           <Reveal delay={0.1} className="grid min-w-0 grid-cols-1 gap-3">
             <div className="rounded-2xl bg-white p-5 text-ink">
@@ -348,16 +367,17 @@ function Field({ id, label, children }) {
 }
 const input = "w-full rounded-2xl bg-surface px-4 py-3 text-[15.5px] outline-none ring-1 ring-transparent transition placeholder:text-muted/70 focus:bg-white focus:ring-ink";
 
-function Formulario() {
+function Formulario({ onOpenLegal }) {
   const [erro, setErro] = useState("");
   const [link, setLink] = useState("");
   function enviar(e) {
     e.preventDefault();
     const f = new FormData(e.currentTarget);
-    const nome = f.get("nome").trim(), igreja = f.get("igreja").trim(), tel = f.get("tel").trim();
+    const nome = f.get("nome").trim(), igreja = f.get("igreja").trim(), tel = f.get("tel").trim(), lgpd = f.get("lgpd");
     if (!nome || !igreja || tel.replace(/\D/g, "").length < 10) { setErro("Preencha seu nome, a igreja e um WhatsApp com DDD."); setLink(""); return; }
+    if (!lgpd) { setErro("Para prosseguir, confirme sua ciência da Política de Privacidade e LGPD."); setLink(""); return; }
     setErro("");
-    const msg = `Olá! Quero conhecer o Atos Hub.\nNome: ${nome}\nIgreja: ${igreja}\nCidade: ${f.get("cidade").trim() || "-"}\nPessoas na igreja: ${f.get("pessoas")}\nCélulas: ${f.get("celulas")}\nWhatsApp: ${tel}`;
+    const msg = `Olá! Quero conhecer o Atos Hub.\nNome: ${nome}\nIgreja: ${igreja}\nCidade: ${f.get("cidade").trim() || "-"}\nPessoas na igreja: ${f.get("pessoas")}\nCélulas: ${f.get("celulas")}\nWhatsApp: ${tel}\nConsentimento LGPD: Aceito (${EMPRESA_LEGAL.cnpj})`;
     const url = `https://wa.me/${WHATSAPP_VENDAS}?text=${encodeURIComponent(msg)}`;
     setLink(url);
     window.open(url, "_blank", "noopener");
@@ -382,6 +402,24 @@ function Formulario() {
         </Field>
       </div>
       <Field id="f-tel" label="Seu WhatsApp"><input id="f-tel" name="tel" type="tel" inputMode="tel" autoComplete="tel" placeholder="(21) 99999-9999" className={input} /></Field>
+      <label className="flex items-start gap-2.5 rounded-2xl bg-surface/80 p-3 text-[12.5px] leading-relaxed text-muted ring-1 ring-line/70">
+        <input
+          type="checkbox"
+          name="lgpd"
+          defaultChecked
+          className="mt-0.5 h-4 w-4 flex-none rounded accent-ink"
+        />
+        <span>
+          Autorizo o tratamento dos meus dados por <strong className="font-medium text-ink">{EMPRESA_LEGAL.razaoSocial}</strong> (CNPJ {EMPRESA_LEGAL.cnpj}) para contato comercial via WhatsApp, nos termos da{" "}
+          <button type="button" onClick={() => onOpenLegal?.("privacidade")} className="font-medium text-ink underline underline-offset-2">
+            Política de Privacidade (LGPD)
+          </button>{" "}
+          e dos{" "}
+          <button type="button" onClick={() => onOpenLegal?.("termos")} className="font-medium text-ink underline underline-offset-2">
+            Termos de Uso
+          </button>.
+        </span>
+      </label>
       {erro && <p role="alert" className="rounded-2xl bg-coral-soft px-4 py-3 text-[14px] text-[#A3281C]">{erro}</p>}
       <button type="submit" className="btn-dark justify-center">Quero conhecer o Atos Hub <Arrow /></button>
       {link && <a href={link} target="_blank" rel="noopener noreferrer" className="text-center text-[13.5px] text-muted underline underline-offset-4">Se o WhatsApp não abriu, toque aqui</a>}
@@ -429,7 +467,7 @@ function NossosProdutos() {
   );
 }
 
-function ChamadaFinal() {
+function ChamadaFinal({ onOpenLegal }) {
   return (
     <section id="demonstracao" className="scroll-mt-20 px-5 pb-24">
       <div className="bloom relative mx-auto grid max-w-6xl grid-cols-1 items-center gap-10 overflow-hidden rounded-[28px] p-8 md:grid-cols-[1fr_1.05fr] md:p-14">
@@ -443,13 +481,13 @@ function ChamadaFinal() {
             ))}
           </ul>
         </Reveal>
-        <Reveal delay={0.1}><div id="form-demo" className="scroll-mt-24"><Formulario /></div></Reveal>
+        <Reveal delay={0.1}><div id="form-demo" className="scroll-mt-24"><Formulario onOpenLegal={onOpenLegal} /></div></Reveal>
       </div>
     </section>
   );
 }
 
-export default function Home() {
+export default function Home({ onOpenLegal }) {
   return (
     <main>
       <Hero />
@@ -458,9 +496,9 @@ export default function Home() {
       <Problema />
       <Pilares />
       <ParaQuem />
-      <Confianca />
+      <Confianca onOpenLegal={onOpenLegal} />
       <NossosProdutos />
-      <ChamadaFinal />
+      <ChamadaFinal onOpenLegal={onOpenLegal} />
     </main>
   );
 }

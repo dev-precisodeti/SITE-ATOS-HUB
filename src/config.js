@@ -16,6 +16,14 @@ export const VIDEOS = {
 // Mensagem que já vem escrita quando a pessoa clica em "Falar no WhatsApp"
 export const MENSAGEM_WHATSAPP = "Olá! Vim pelo site e quero conhecer o Atos Hub.";
 
+// Identificação jurídica (LGPD / Termos de Uso)
+export const EMPRESA_LEGAL = {
+  razaoSocial: "PRECISO DE TI SERVICOS DE CLOUD E SISTEMAS LTDA",
+  cnpj: "65.763.438/0001-77",
+  emailDpo: "dev@precisodeti.com.br",
+  atualizacao: "Novembro de 2026",
+};
+
 // Ecossistema de produtos
 export const NOSSOS_PRODUTOS = [
   {
