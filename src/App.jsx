@@ -52,20 +52,20 @@ function Nav() {
   }, []);
 
   return (
-    <header className="fixed inset-x-0 top-0 z-50">
+    <header className="fixed inset-x-0 top-0 z-50 w-full max-w-full">
       <AnimatePresence>
         {!solid && (
-          <motion.div initial={{ height: 0 }} animate={{ height: "auto" }} exit={{ height: 0 }} className="overflow-hidden border-b border-line bg-surface/80 backdrop-blur">
-            <a href="#celulas" className="flex items-center justify-center gap-3 px-4 py-2 text-[13px]">
-              <span className="rounded-full bg-ink px-2 py-0.5 text-[10.5px] font-medium uppercase tracking-wide text-white">Novo</span>
-              <span className="truncate text-muted">Células ao vivo: acompanhe a presença no momento em que os encontros acontecem</span>
-              <span className="hidden font-medium sm:inline">Conhecer →</span>
+          <motion.div initial={{ height: 0 }} animate={{ height: "auto" }} exit={{ height: 0 }} className="overflow-hidden border-b border-line bg-surface/80 backdrop-blur w-full">
+            <a href="#celulas" className="flex items-center justify-center gap-2 sm:gap-3 px-3 sm:px-4 py-2 text-[12px] sm:text-[13px] max-w-full overflow-hidden">
+              <span className="rounded-full bg-ink px-2 py-0.5 text-[10px] sm:text-[10.5px] font-medium uppercase tracking-wide text-white flex-none">Novo</span>
+              <span className="truncate text-muted min-w-0">Células ao vivo: acompanhe a presença no momento em que os encontros acontecem</span>
+              <span className="hidden font-medium sm:inline flex-none">Conhecer →</span>
             </a>
           </motion.div>
         )}
       </AnimatePresence>
       <div className={`transition-colors duration-300 ${solid ? "border-b border-line bg-white/85 backdrop-blur-xl" : "bg-transparent"}`}>
-        <div className="mx-auto flex h-16 max-w-7xl items-center justify-between gap-4 px-5">
+        <div className="mx-auto flex h-16 max-w-7xl items-center justify-between gap-2 sm:gap-4 px-3 sm:px-5">
           <Logo />
           <nav className="hidden items-center gap-1 lg:flex" aria-label="Principal">
             {LINKS.map(([t, h]) => <a key={h} href={h} className="rounded-full px-3.5 py-2 text-[14.5px] text-muted transition hover:bg-surface hover:text-ink">{t}</a>)}
@@ -120,9 +120,12 @@ function Nav() {
               </AnimatePresence>
             </div>
           </nav>
-          <div className="flex items-center gap-2">
-            <a href="#demonstracao" className="btn-dark py-2.5 text-[14px]"><span className="hidden sm:inline">Agendar uma demonstração</span><span className="sm:hidden">Demonstração</span></a>
-            <button onClick={() => setMenu((m) => !m)} aria-label="Menu" aria-expanded={menu} className="grid h-10 w-10 place-items-center rounded-full bg-surface lg:hidden">
+          <div className="flex items-center gap-1.5 sm:gap-2 flex-none">
+            <a href="#demonstracao" className="btn-dark px-3 py-2 sm:px-6 sm:py-2.5 text-[12.5px] sm:text-[14px] whitespace-nowrap">
+              <span className="hidden sm:inline">Agendar uma demonstração</span>
+              <span className="sm:hidden">Agendar</span>
+            </a>
+            <button onClick={() => setMenu((m) => !m)} aria-label="Menu" aria-expanded={menu} className="grid h-9 w-9 sm:h-10 sm:w-10 place-items-center rounded-full bg-surface lg:hidden flex-none">
               <svg viewBox="0 0 24 24" className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth="2"><path d={menu ? "M6 6l12 12M18 6 6 18" : "M4 8h16M4 16h16"} /></svg>
             </button>
           </div>
@@ -254,12 +257,12 @@ function Footer() {
 export default function App() {
   useHashScroll();
   return (
-    <>
+    <div className="min-h-screen w-full max-w-full overflow-x-hidden bg-white">
       <Nav />
       <div id="inicio" />
       <Home />
       <Footer />
       <BotaoWhatsApp />
-    </>
+    </div>
   );
 }

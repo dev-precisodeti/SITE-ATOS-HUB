@@ -25,7 +25,7 @@ export function Logo({ className = "", dark = false }) {
       <img
         src={src}
         alt="ATOS HUB"
-        className="h-8 w-auto md:h-9"
+        className="h-7 w-auto sm:h-8 md:h-9"
       />
     </a>
   );

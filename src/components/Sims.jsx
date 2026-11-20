@@ -107,33 +107,34 @@ export function CelulasLiveSim({ paused }) {
     <div className="relative flex h-full w-full flex-col overflow-hidden rounded-2xl bg-white text-slate-800 shadow-2xl ring-1 ring-black/10 select-none font-sans">
       
       {/* CABEÇALHO DO MÓDULO DE CÉLULAS */}
-      <div className="flex h-12 flex-none items-center justify-between border-b border-slate-200/80 bg-white px-3 md:px-5">
-        <div className="flex items-center gap-2.5">
-          <div className="grid h-7 w-7 place-items-center rounded-lg bg-[#FFF4EC] text-[#F26A21]">
-            <DashIcons.cells className="h-4 w-4" />
+      <div className="flex h-11 sm:h-12 flex-none items-center justify-between border-b border-slate-200/80 bg-white px-2.5 sm:px-3 md:px-5">
+        <div className="flex items-center gap-2 min-w-0 pr-1">
+          <div className="grid h-6 w-6 sm:h-7 sm:w-7 flex-none place-items-center rounded-lg bg-[#FFF4EC] text-[#F26A21]">
+            <DashIcons.cells className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
           </div>
-          <div className="flex flex-col text-left leading-none">
-            <span className="text-[13px] font-bold text-slate-900">
+          <div className="flex flex-col text-left leading-none min-w-0">
+            <span className="text-[12px] sm:text-[13px] font-bold text-slate-900 truncate">
               Gestão de Células
             </span>
-            <span className="mt-0.5 text-[10px] text-slate-400">
-              Lista e acompanhamento de reuniões em tempo real
+            <span className="mt-0.5 text-[9px] sm:text-[10px] text-slate-400 truncate hidden xs:inline sm:inline">
+              Lista e reuniões em tempo real
             </span>
           </div>
         </div>
 
-        <div className="flex items-center gap-2.5">
-          <span className="hidden items-center gap-1.5 rounded-full bg-[#EAFBF3] px-2.5 py-1 text-[10.5px] font-bold text-[#1FAF7A] sm:inline-flex">
-            <LiveDot /> 38 reunidas hoje
+        <div className="flex items-center gap-1.5 sm:gap-2.5 flex-none">
+          <span className="hidden items-center gap-1.5 rounded-full bg-[#EAFBF3] px-2.5 py-1 text-[10px] font-bold text-[#1FAF7A] md:inline-flex">
+            <LiveDot /> 38 hoje
           </span>
-          <span className="rounded-xl border border-slate-200/80 bg-slate-50 px-2.5 py-1 text-[11px] font-medium text-slate-600">
-            Todas as Redes (214) ▾
+          <span className="rounded-xl border border-slate-200/80 bg-slate-50 px-2 sm:px-2.5 py-1 text-[10px] sm:text-[11px] font-medium text-slate-600">
+            <span className="hidden sm:inline">Todas as Redes (214)</span>
+            <span className="sm:hidden">Redes ▾</span>
           </span>
         </div>
       </div>
 
       {/* LISTA DE CÉLULAS (ESTILO IDÊNTICO AO PRINT 5) */}
-      <div className="flex-1 overflow-y-auto bg-[#F8F9FA] p-2.5 md:p-3.5 space-y-2">
+      <div className="flex-1 overflow-y-auto bg-[#F8F9FA] p-2 sm:p-2.5 md:p-3.5 space-y-2">
         {celulasLista.map((c, idx) => {
           // Animação sutil de presença ao vivo para células que se reúnem hoje
           const presentesDin = c.reuniaoHoje
@@ -146,50 +147,44 @@ export function CelulasLiveSim({ paused }) {
               initial={{ opacity: 0, y: 6 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: idx * 0.05 }}
-              className="group rounded-2xl border border-slate-200/70 bg-white p-3 shadow-sm transition hover:border-[#F26A21]/40 hover:shadow-md"
+              className="group rounded-xl sm:rounded-2xl border border-slate-200/70 bg-white p-2 sm:p-3 shadow-xs transition hover:border-[#F26A21]/40 hover:shadow-md"
             >
-              {/* ESTRUTURA ESPAÇOSA EM 2 LINHAS - NUNCA SOBREPÕE */}
               {/* LINHA 1: Nome da Célula + Perfil (Esquerda) | Rede com bolinha colorida (Direita) */}
-              <div className="flex items-center justify-between gap-2 text-left">
-                <div className="flex items-center gap-2 min-w-0">
-                  <h5 className="truncate text-[12.5px] md:text-[13px] font-extrabold uppercase tracking-tight text-slate-900 leading-snug">
-                    {c.nome}
-                  </h5>
-                  <span className="rounded-md bg-[#FFF4EC] px-2 py-0.5 text-[9.5px] font-bold uppercase tracking-wide text-[#F26A21] flex-none">
-                    {c.perfil}
-                  </span>
+              <div className="flex items-start justify-between gap-1.5 text-left">
+                <div className="min-w-0 pr-1">
+                  <div className="flex items-center gap-1.5 flex-wrap">
+                    <h5 className="text-[11.5px] sm:text-[12.5px] md:text-[13px] font-extrabold uppercase tracking-tight text-slate-900 leading-snug">
+                      {c.nome}
+                    </h5>
+                    <span className="rounded-md bg-[#FFF4EC] px-1.5 py-0.2 text-[8px] sm:text-[9px] font-bold uppercase tracking-wide text-[#F26A21] flex-none">
+                      {c.perfil}
+                    </span>
+                  </div>
                 </div>
-                <div className="inline-flex items-center gap-1.5 rounded-full border border-slate-200 bg-white px-2.5 py-0.5 shadow-sm flex-none">
-                  <span className={`h-2.5 w-2.5 rounded-full ${c.redeDot}`} />
-                  <span className="text-[10px] md:text-[10.5px] font-extrabold uppercase tracking-tight text-slate-800 whitespace-nowrap">
+                <div className="inline-flex items-center gap-1 rounded-full border border-slate-200 bg-white px-2 py-0.5 shadow-2xs flex-none">
+                  <span className={`h-2 w-2 rounded-full ${c.redeDot}`} />
+                  <span className="text-[9px] sm:text-[10px] font-extrabold uppercase tracking-tight text-slate-800 whitespace-nowrap">
                     {c.rede}
                   </span>
                 </div>
               </div>
 
-              {/* LINHA 2: Líder + Horário + Campus (Esquerda) | Membros & Presença ao Vivo (Direita) */}
-              <div className="mt-2 flex items-center justify-between gap-2 border-t border-slate-100 pt-2 text-[11px] text-left">
-                <div className="flex flex-wrap items-center gap-1.5 md:gap-2 min-w-0 text-slate-600">
-                  <div className="flex items-center gap-1 font-bold text-slate-800">
-                    <span className="rounded bg-[#FFF4EC] px-1 py-0.5 text-[8.5px] font-extrabold uppercase tracking-wider text-[#F26A21]">
-                      LÍDER
-                    </span>
-                    <span className="truncate uppercase text-[11px] md:text-[11.5px]">{c.lider}</span>
-                  </div>
-                  <span className="text-slate-300">•</span>
-                  <span className="font-semibold uppercase text-[10px] text-slate-500">{c.horario}</span>
-                  <span className="text-slate-300 hidden sm:inline">•</span>
-                  <span className="font-semibold uppercase text-[10px] text-slate-400 hidden sm:inline">{c.campus}</span>
+              {/* LINHA 2: Líder + Horário + Presença */}
+              <div className="mt-1.5 flex items-center justify-between gap-1 border-t border-slate-100 pt-1.5 text-[10px] sm:text-[11px] text-left">
+                <div className="flex items-center gap-1 min-w-0 text-slate-600 truncate">
+                  <span className="rounded bg-[#FFF4EC] px-1 py-0.2 text-[7.5px] sm:text-[8px] font-extrabold uppercase tracking-wider text-[#F26A21] flex-none">
+                    LÍDER
+                  </span>
+                  <span className="truncate uppercase text-[9.5px] sm:text-[11px] font-bold text-slate-800">{c.lider}</span>
+                  <span className="text-slate-300 flex-none">•</span>
+                  <span className="font-semibold uppercase text-[9px] sm:text-[9.5px] text-slate-500 flex-none truncate">{c.horario}</span>
                 </div>
 
-                <div className="flex items-center gap-2 flex-none pl-2 text-right">
-                  <span className="text-[12px] font-extrabold text-slate-900">
-                    {c.membros} <span className="text-[10px] font-semibold text-slate-400">membros</span>
-                  </span>
+                <div className="flex items-center gap-1 flex-none pl-1 text-right">
                   {c.reuniaoHoje && (
-                    <span className="inline-flex items-center gap-1 rounded-full bg-[#EAFBF3] px-2 py-0.5 text-[10px] font-bold text-[#1FAF7A]">
+                    <span className="inline-flex items-center gap-1 rounded-full bg-[#EAFBF3] px-1.5 sm:px-2 py-0.5 text-[8.5px] sm:text-[9.5px] font-bold text-[#1FAF7A] whitespace-nowrap">
                       <span className="h-1.5 w-1.5 rounded-full bg-[#1FAF7A] animate-pulse" />
-                      <span>{presentesDin}/{c.membros} presentes</span>
+                      <span>{presentesDin}/{c.membros} pres.</span>
                     </span>
                   )}
                 </div>
@@ -293,32 +288,32 @@ export function GuardiaoSim({ paused }) {
     <div className="relative flex h-full w-full flex-col overflow-hidden rounded-2xl bg-white text-slate-800 shadow-2xl ring-1 ring-black/10 select-none font-sans">
       
       {/* BARRA SUPERIOR DE NAVEGAÇÃO ENTRE VISÕES */}
-      <div className="flex h-12 flex-none items-center justify-between border-b border-slate-200/80 bg-white px-3 md:px-4">
-        {/* Perfil do Guardião Responsável (Fictício - ajustado para caber nome, e-mail e telefone) */}
-        <div className="flex items-center gap-2.5 min-w-0 pr-2">
-          <div className="grid h-8 w-8 flex-none place-items-center rounded-full bg-[#FFEADC] font-bold text-[12px] text-[#F26A21]">
+      <div className="flex h-11 sm:h-12 flex-none items-center justify-between border-b border-slate-200/80 bg-white px-2.5 sm:px-3 md:px-4">
+        {/* Perfil do Responsável pelo Cuidado */}
+        <div className="flex items-center gap-2 min-w-0 pr-1">
+          <div className="grid h-7 w-7 sm:h-8 sm:w-8 flex-none place-items-center rounded-full bg-[#FFEADC] font-bold text-[11px] sm:text-[12px] text-[#F26A21]">
             M
           </div>
           <div className="flex flex-col text-left leading-none min-w-0">
-            <span className="truncate text-[12.5px] font-bold text-slate-900">
+            <span className="truncate text-[11.5px] sm:text-[12.5px] font-bold text-slate-900">
               Mariana Duarte Costa
             </span>
-            <div className="mt-1 flex items-center gap-1.5 text-[10px] text-slate-500 whitespace-nowrap">
+            <div className="mt-0.5 flex items-center gap-1 text-[9.5px] sm:text-[10px] text-slate-500 whitespace-nowrap truncate">
               <span>m.costa@atos.org</span>
-              <span className="text-slate-300">•</span>
-              <span>(11) 97123-4567</span>
+              <span className="text-slate-300 hidden sm:inline">•</span>
+              <span className="hidden sm:inline">(11) 97123-4567</span>
             </div>
           </div>
         </div>
 
         {/* Abas de visualização compactas e elegantes */}
-        <div className="flex items-center gap-1 rounded-xl bg-slate-100 p-0.5 text-[10.5px] font-medium flex-none">
+        <div className="flex items-center gap-1 rounded-xl bg-slate-100 p-0.5 text-[10px] sm:text-[10.5px] font-medium flex-none">
           <button
             type="button"
             onClick={() => setTabManual("carteira")}
-            className={`rounded-lg px-2.5 py-1 transition ${
+            className={`rounded-lg px-2 sm:px-2.5 py-1 transition ${
               tabAtiva === "carteira"
-                ? "bg-white font-bold text-[#F26A21] shadow-sm"
+                ? "bg-white font-bold text-[#F26A21] shadow-xs"
                 : "text-slate-500 hover:text-slate-900"
             }`}
           >
@@ -327,9 +322,9 @@ export function GuardiaoSim({ paused }) {
           <button
             type="button"
             onClick={() => setTabManual("detalhe")}
-            className={`flex items-center gap-1.5 rounded-lg px-2.5 py-1 transition ${
+            className={`flex items-center gap-1 rounded-lg px-2 sm:px-2.5 py-1 transition ${
               tabAtiva === "detalhe"
-                ? "bg-white font-bold text-[#F26A21] shadow-sm"
+                ? "bg-white font-bold text-[#F26A21] shadow-xs"
                 : "text-slate-500 hover:text-slate-900"
             }`}
           >
@@ -402,14 +397,12 @@ export function GuardiaoSim({ paused }) {
                     transition={{ delay: idx * 0.04 }}
                     className="group flex items-center justify-between rounded-xl border border-slate-200/70 bg-white px-3 py-2.5 shadow-sm transition hover:border-[#F26A21]/30 hover:bg-[#FFFDFB]"
                   >
-                    <div className="flex items-center gap-2.5 min-w-0">
+                    <div className="flex items-center gap-2 min-w-0 pr-1">
                       <div className="min-w-0 truncate">
-                        <div className="flex items-center gap-2">
-                          <span className="truncate text-[12.5px] font-bold text-slate-800">
-                            {m.nome}
-                          </span>
+                        <div className="truncate text-[11.5px] sm:text-[12.5px] font-bold text-slate-800">
+                          {m.nome}
                         </div>
-                        <div className="mt-0.5 flex flex-wrap items-center gap-2 text-[10.5px] text-slate-400">
+                        <div className="mt-0.5 flex items-center gap-1.5 text-[9.5px] sm:text-[10.5px] text-slate-400 truncate">
                           <span>{m.tel}</span>
                           <span>•</span>
                           <span>{m.idade}</span>
@@ -417,36 +410,36 @@ export function GuardiaoSim({ paused }) {
                       </div>
                     </div>
 
-                    <div className="flex items-center gap-2 flex-none">
+                    <div className="flex items-center gap-1.5 flex-none">
                       {/* ETIQUETA: ATIVO E CONECTADO */}
                       {m.status === "ativo" && (
-                        <span className="flex items-center gap-1.5 rounded-full border border-[#F26A21]/40 bg-[#FFF6F0] px-2.5 py-0.5 text-[10px] font-bold text-[#F26A21] whitespace-nowrap">
+                        <span className="flex items-center gap-1 rounded-full border border-[#F26A21]/40 bg-[#FFF6F0] px-2 py-0.5 text-[8.5px] sm:text-[9.5px] font-bold text-[#F26A21] whitespace-nowrap">
                           <span className="h-1.5 w-1.5 rounded-full bg-[#1FAF7A]" />
-                          {m.statusLabel}
+                          <span>{m.statusLabel}</span>
                         </span>
                       )}
 
                       {/* ETIQUETA: ATIVO E SEM CÉLULA */}
                       {m.status === "sem_celula" && (
-                        <span className="flex items-center gap-1.5 rounded-full border border-sky-200 bg-sky-50 px-2.5 py-0.5 text-[10px] font-bold text-sky-700 whitespace-nowrap">
+                        <span className="flex items-center gap-1 rounded-full border border-sky-200 bg-sky-50 px-2 py-0.5 text-[8.5px] sm:text-[9.5px] font-bold text-sky-700 whitespace-nowrap">
                           <span className="h-1.5 w-1.5 rounded-full bg-sky-500" />
-                          {m.statusLabel}
+                          <span>{m.statusLabel}</span>
                         </span>
                       )}
 
                       {/* ETIQUETA: AFASTADO */}
                       {m.status === "afastado" && (
-                        <span className="flex items-center gap-1.5 rounded-full border border-rose-200 bg-rose-50 px-2.5 py-0.5 text-[10px] font-bold text-rose-600 whitespace-nowrap">
+                        <span className="flex items-center gap-1 rounded-full border border-rose-200 bg-rose-50 px-2 py-0.5 text-[8.5px] sm:text-[9.5px] font-bold text-rose-600 whitespace-nowrap">
                           <span className="h-1.5 w-1.5 rounded-full bg-rose-500" />
-                          {m.statusLabel}
+                          <span>{m.statusLabel}</span>
                         </span>
                       )}
 
                       {/* ETIQUETA: EM OUTRA IGREJA */}
                       {m.status === "outra_igreja" && (
-                        <span className="flex items-center gap-1.5 rounded-full border border-amber-200 bg-[#FFF9F0] px-2.5 py-0.5 text-[10px] font-bold text-amber-700 whitespace-nowrap">
+                        <span className="flex items-center gap-1 rounded-full border border-amber-200 bg-[#FFF9F0] px-2 py-0.5 text-[8.5px] sm:text-[9.5px] font-bold text-amber-700 whitespace-nowrap">
                           <span className="h-1.5 w-1.5 rounded-full bg-amber-500" />
-                          {m.statusLabel}
+                          <span>{m.statusLabel}</span>
                         </span>
                       )}
 
@@ -483,23 +476,23 @@ export function GuardiaoSim({ paused }) {
               className="flex h-full flex-col overflow-y-auto p-3 text-left md:p-4 space-y-3"
             >
               {/* CABEÇALHO DO MEMBRO ATENDIDO (100% FICTÍCIO) */}
-              <div className="flex items-center justify-between rounded-xl border border-slate-200/80 bg-white p-3 shadow-sm">
-                <div className="flex items-center gap-3">
-                  <div className="grid h-9 w-9 place-items-center rounded-xl bg-[#EAFBF3] font-bold text-[14px] text-[#1FAF7A]">
+              <div className="flex items-start justify-between rounded-xl border border-slate-200/80 bg-white p-2.5 sm:p-3 shadow-xs">
+                <div className="flex items-start gap-2.5 min-w-0 pr-1">
+                  <div className="grid h-8 w-8 place-items-center rounded-xl bg-[#EAFBF3] font-bold text-[13px] text-[#1FAF7A] flex-none mt-0.5">
                     J
                   </div>
-                  <div>
-                    <div className="flex items-center gap-2">
-                      <h4 className="text-[13.5px] font-bold text-slate-900">
+                  <div className="min-w-0">
+                    <div className="flex items-center gap-1.5 flex-wrap">
+                      <h4 className="text-[12.5px] sm:text-[13.5px] font-bold text-slate-900 leading-snug">
                         Juliana Mendes Calheiros
                       </h4>
-                      <span className="inline-flex items-center gap-1.5 rounded-full bg-[#EAFBF3] px-2.5 py-0.5 text-[10px] font-bold text-[#1FAF7A]">
+                      <span className="inline-flex items-center gap-1 rounded-full bg-[#EAFBF3] px-2 py-0.2 text-[8.5px] sm:text-[9.5px] font-bold text-[#1FAF7A] flex-none">
                         <span className="h-1.5 w-1.5 rounded-full bg-[#1FAF7A]" />
                         Reconectado
                       </span>
                     </div>
-                    <p className="mt-0.5 text-[10.5px] text-slate-400">
-                      ID: 14082 • (11) 98777-8899 <span className="text-[#1FAF7A] font-semibold">WhatsApp</span> • Jardins, São Paulo
+                    <p className="mt-0.5 text-[9.5px] sm:text-[10px] text-slate-400 truncate">
+                      ID: 14082 • (11) 98777-8899 WhatsApp
                     </p>
                   </div>
                 </div>
@@ -507,7 +500,7 @@ export function GuardiaoSim({ paused }) {
                 <button
                   type="button"
                   onClick={() => setTabManual("carteira")}
-                  className="rounded-lg p-1 text-slate-400 hover:bg-slate-100 hover:text-slate-600 transition"
+                  className="rounded-lg p-1 text-slate-400 hover:bg-slate-100 hover:text-slate-600 transition flex-none"
                   aria-label="Voltar para a lista"
                 >
                   <CareIcons.close className="h-4 w-4" />
@@ -690,26 +683,24 @@ export function VisitanteSim({ paused }) {
   return (
     <div className="relative flex h-full w-full flex-col overflow-hidden rounded-2xl bg-white text-slate-800 shadow-2xl ring-1 ring-black/10 select-none font-sans">
       {/* CABEÇALHO DO MODAL FIEL AO PRINT 2 */}
-      <div className="flex h-14 flex-none items-center justify-between border-b border-slate-200/80 bg-white px-3.5 md:px-5">
-        <div className="flex items-center gap-2.5 min-w-0">
-          <div className="grid h-8 w-8 flex-none place-items-center rounded-lg bg-[#EAFBF3] text-[13px] font-extrabold text-[#1FAF7A]">
+      <div className="flex h-12 sm:h-14 flex-none items-center justify-between border-b border-slate-200/80 bg-white px-2.5 sm:px-3.5 md:px-5">
+        <div className="flex items-center gap-2 sm:gap-2.5 min-w-0 pr-1">
+          <div className="grid h-7 w-7 sm:h-8 sm:w-8 flex-none place-items-center rounded-lg bg-[#EAFBF3] text-[12px] sm:text-[13px] font-extrabold text-[#1FAF7A]">
             R
           </div>
           <div className="flex flex-col text-left leading-none min-w-0">
-            <div className="flex items-center gap-2">
-              <span className="truncate text-[13px] font-extrabold text-slate-900">
-                Roberta Lopes de Santana
+            <div className="flex items-center gap-1.5 min-w-0">
+              <span className="truncate text-[12px] sm:text-[13px] font-extrabold text-slate-900">
+                Roberta Lopes
               </span>
-              <span className="inline-flex items-center gap-1 rounded-full bg-[#EAFBF3] px-2 py-0.5 text-[9.5px] font-bold text-[#1FAF7A] border border-[#1FAF7A]/20 flex-none">
+              <span className="inline-flex items-center gap-1 rounded-full bg-[#EAFBF3] px-1.5 sm:px-2 py-0.5 text-[8.5px] sm:text-[9.5px] font-bold text-[#1FAF7A] border border-[#1FAF7A]/20 flex-none whitespace-nowrap">
                 <span className="h-1.5 w-1.5 rounded-full bg-[#1FAF7A]" /> Reconectado
               </span>
             </div>
-            <div className="mt-1 flex items-center gap-1.5 text-[10px] text-slate-400 truncate">
+            <div className="mt-0.5 flex items-center gap-1.5 text-[9.5px] sm:text-[10px] text-slate-400 truncate">
               <span>ID: 59188</span>
               <span>•</span>
-              <span className="text-slate-600 font-medium">(21) 98765-4321 WhatsApp</span>
-              <span className="hidden sm:inline">•</span>
-              <span className="truncate hidden sm:inline">Jardim Botânico, Rio de Janeiro</span>
+              <span className="text-slate-600 font-medium truncate">(21) 98765-4321 WhatsApp</span>
             </div>
           </div>
         </div>
@@ -888,11 +879,11 @@ export function AppWindow({ paused }) {
       
       {/* 1. TOPBAR FIEL AO PRINT */}
       <header className="flex h-12 flex-none items-center justify-between border-b border-slate-200/80 bg-white px-3 md:px-5">
-        <div className="flex items-center gap-2.5">
-          <img src="/brand/atoshub-selo-laranja-transparente.svg" alt="Atos Hub" className="h-6 w-6 rounded-md shadow-sm" />
-          <div className="flex flex-col text-left leading-none">
-            <span className="text-[9px] font-semibold uppercase tracking-wider text-slate-400">PLATAFORMA</span>
-            <span className="text-[12.5px] font-extrabold uppercase tracking-tight text-slate-900">COMUNIDADE ESPERANÇA</span>
+        <div className="flex items-center gap-2 min-w-0 pr-1">
+          <img src="/brand/atoshub-selo-laranja-transparente.svg" alt="Atos Hub" className="h-5 w-5 sm:h-6 sm:w-6 rounded-md shadow-2xs flex-none" />
+          <div className="flex flex-col text-left leading-none min-w-0">
+            <span className="text-[8px] sm:text-[9px] font-semibold uppercase tracking-wider text-slate-400">PLATAFORMA</span>
+            <span className="text-[11px] sm:text-[12.5px] font-extrabold uppercase tracking-tight text-slate-900 truncate">COMUNIDADE ESPERANÇA</span>
           </div>
         </div>
 

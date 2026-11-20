@@ -48,7 +48,7 @@ function ShowcaseVideo() {
   const radius = useTransform(scrollYProgress, [0, 1], [48, 28]);
   const tilt = useTransform(scrollYProgress, [0, 1], [10, 0]);
   return (
-    <section ref={ref} className="px-3 md:px-6" aria-label="Atos Hub em uso">
+    <section ref={ref} className="px-3 md:px-6 overflow-hidden" aria-label="Atos Hub em uso">
       <motion.div style={{ scale, borderRadius: radius, rotateX: tilt, transformPerspective: 1600 }}
         className="relative mx-auto aspect-[4/5] max-w-[1400px] overflow-hidden bg-[#0E0F13] sm:aspect-[16/10] md:aspect-[16/9]">
         <div className="absolute inset-0 opacity-60" style={{ backgroundImage: "radial-gradient(rgba(255,255,255,.18) 1px, transparent 1px)", backgroundSize: "26px 26px" }} />
@@ -70,7 +70,7 @@ function IconMarquee() {
   const items = ["heart", "home", "wave", "hands", "music", "kids", "chart", "lock", "team", "clock", "pin", "calendar", "bell", "route"];
   const row = [...items, ...items];
   return (
-    <div className="relative mt-16 overflow-hidden py-4 [mask-image:linear-gradient(90deg,transparent,#000_12%,#000_88%,transparent)]" aria-hidden="true">
+    <div className="relative mt-16 max-w-full overflow-hidden py-4 [mask-image:linear-gradient(90deg,transparent,#000_12%,#000_88%,transparent)]" aria-hidden="true">
       <motion.div className="flex w-max gap-4" animate={{ x: ["0%", "-50%"] }} transition={{ duration: 38, ease: "linear", repeat: Infinity }}>
         {row.map((k, i) => {
           const C = Icons[k];
@@ -110,29 +110,29 @@ function Problema() {
 /* ================= PILARES EM SEÇÕES ALTERNADAS ================= */
 function Feature({ eyebrow, title, text, bullets, children, flip, id, videoKey, dark, mobile }) {
   return (
-    <div id={id} className={`mx-auto grid max-w-6xl scroll-mt-24 items-center gap-10 px-5 py-12 md:gap-14 md:py-16 ${flip ? "md:grid-cols-[1.1fr_0.9fr]" : "md:grid-cols-[0.9fr_1.1fr]"}`}>
-      <Reveal className={`text-center md:text-left ${flip ? "md:order-2" : ""}`}>
+    <div id={id} className={`mx-auto grid grid-cols-1 max-w-6xl scroll-mt-24 items-center gap-8 sm:gap-10 px-4 sm:px-5 py-10 md:gap-14 md:py-16 ${flip ? "md:grid-cols-[1.1fr_0.9fr]" : "md:grid-cols-[0.9fr_1.1fr]"}`}>
+      <Reveal className={`w-full min-w-0 text-center md:text-left ${flip ? "md:order-2" : ""}`}>
         <span className="eyebrow">{eyebrow}</span>
-        <h3 className="h-display mt-3 text-[clamp(28px,3vw,38px)] leading-tight">{title}</h3>
-        <p className="mx-auto mt-4 max-w-md text-[16px] leading-relaxed text-muted md:mx-0">{text}</p>
-        <ul className="mx-auto mt-6 grid max-w-md gap-2.5 text-left text-[14.5px] md:mx-0">
+        <h3 className="h-display mt-3 text-[clamp(26px,3vw,38px)] leading-tight">{title}</h3>
+        <p className="mx-auto mt-4 max-w-md text-[15px] sm:text-[16px] leading-relaxed text-muted md:mx-0">{text}</p>
+        <ul className="mx-auto mt-5 sm:mt-6 grid max-w-md gap-2.5 text-left text-[14px] sm:text-[14.5px] md:mx-0">
           {bullets.map((b) => (
-            <li key={b} className="flex gap-3"><span className="mt-1.5 h-1.5 w-1.5 flex-none rounded-full bg-amber" />{b}</li>
+            <li key={b} className="flex gap-2.5 sm:gap-3"><span className="mt-1.5 h-1.5 w-1.5 flex-none rounded-full bg-amber" />{b}</li>
           ))}
         </ul>
       </Reveal>
-      <Reveal delay={0.1} className={`flex justify-center ${flip ? "md:order-1" : ""}`}>
+      <Reveal delay={0.1} className={`flex justify-center w-full min-w-0 ${flip ? "md:order-1" : ""}`}>
         {mobile ? (
-          <div className="relative w-full max-w-[320px] py-1 flex justify-center">
+          <div className="relative w-full max-w-[320px] py-1 flex justify-center mx-auto">
             <div className="absolute -inset-4 rounded-[50px] bg-gradient-to-tr from-[#F26A21]/10 to-emerald-500/10 blur-xl pointer-events-none" />
             <div className="relative w-full">
               <MediaSlot videoKey={videoKey}>{children}</MediaSlot>
             </div>
           </div>
         ) : (
-          <div className={`relative aspect-[4/3] w-full overflow-hidden rounded-[28px] p-5 md:p-10 ${dark ? "bg-[#0E0F13]" : "bloom"}`}>
+          <div className={`relative aspect-auto min-h-[380px] sm:min-h-[420px] md:aspect-[4/3] w-full max-w-xl mx-auto overflow-hidden rounded-[20px] sm:rounded-[28px] p-2.5 sm:p-5 md:p-8 ${dark ? "bg-[#0E0F13]" : "bloom"}`}>
             {dark && <div className="absolute inset-0 opacity-50" style={{ backgroundImage: "radial-gradient(rgba(255,255,255,.18) 1px, transparent 1px)", backgroundSize: "22px 22px" }} />}
-            <div className="relative h-full overflow-hidden rounded-2xl bg-white shadow-[0_30px_60px_-20px_rgba(18,19,23,.25)] ring-1 ring-black/5">
+            <div className="relative h-full min-h-[350px] sm:min-h-0 overflow-hidden rounded-xl sm:rounded-2xl bg-white shadow-[0_20px_50px_-20px_rgba(18,19,23,.25)] ring-1 ring-black/5">
               <MediaSlot videoKey={videoKey}>{children}</MediaSlot>
             </div>
           </div>
@@ -234,11 +234,11 @@ function ParaQuem() {
           <h2 className="h-display mt-4 text-[clamp(32px,4.6vw,56px)] leading-[1.06]">Feito para igrejas em células,<br /><span className="text-muted">do jeito que elas funcionam</span></h2>
         </Reveal>
 
-        <div className="mx-auto mt-10 flex max-w-full flex-wrap justify-center gap-1 rounded-full bg-white p-1 ring-1 ring-line sm:w-max" role="tablist">
+        <div className="mx-auto mt-8 sm:mt-10 flex max-w-full flex-wrap justify-center gap-1 rounded-2xl sm:rounded-full bg-white p-1 ring-1 ring-line sm:w-max" role="tablist">
           {PERFIS.map((x, k) => (
             <button key={x.t} role="tab" aria-selected={k === i} onClick={() => setI(k)}
-              className={`relative rounded-full px-4 py-2 text-[14px] transition ${k === i ? "text-white" : "text-muted hover:text-ink"}`}>
-              {k === i && <motion.span layoutId="perfil-pill" className="absolute inset-0 rounded-full bg-ink" transition={{ type: "spring", stiffness: 400, damping: 34 }} />}
+              className={`relative rounded-xl sm:rounded-full px-3 sm:px-4 py-1.5 sm:py-2 text-[12.5px] sm:text-[14px] transition ${k === i ? "text-white" : "text-muted hover:text-ink"}`}>
+              {k === i && <motion.span layoutId="perfil-pill" className="absolute inset-0 rounded-xl sm:rounded-full bg-ink" transition={{ type: "spring", stiffness: 400, damping: 34 }} />}
               <span className="relative">{x.t}</span>
             </button>
           ))}
