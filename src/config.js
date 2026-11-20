@@ -20,7 +20,7 @@ export const MENSAGEM_WHATSAPP = "Olá! Vim pelo site e quero conhecer o Atos Hu
 export const EMPRESA_LEGAL = {
   razaoSocial: "PRECISO DE TI SERVICOS DE CLOUD E SISTEMAS LTDA",
   cnpj: "65.763.438/0001-77",
-  emailDpo: "dev@precisodeti.com.br",
+  emailDpo: "contato@precisodeti.com.br",
   atualizacao: "Novembro de 2026",
 };
 

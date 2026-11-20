@@ -5,7 +5,7 @@
 **CNPJ:** 65.763.438/0001-77  
 **Site Oficial:** https://atoshub.predeti.com.br  
 **Ecossistema:** PREDETI ERP (https://predeti.com.br) · ATOS DESK (https://atosdesk.predeti.com.br) · ATOS HUB (https://atoshub.predeti.com.br)  
-**Canal de Privacidade / Encarregado de Dados (DPO):** dev@precisodeti.com.br · WhatsApp: (21) 99985-4271
+**Canal de Privacidade / Encarregado de Dados (DPO):** contato@precisodeti.com.br · WhatsApp: (21) 99985-4271
 
 ---
 
@@ -103,5 +103,5 @@ Para exercer seus direitos previstos na LGPD, esclarecer dúvidas ou enviar soli
 
 - **Controladora / Operadora:** PRECISO DE TI SERVICOS DE CLOUD E SISTEMAS LTDA
 - **CNPJ:** 65.763.438/0001-77
-- **E-mail do Encarregado (DPO):** dev@precisodeti.com.br
+- **E-mail do Encarregado (DPO):** contato@precisodeti.com.br
 - **WhatsApp Comercial e Privacidade:** (21) 99985-4271
