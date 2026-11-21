@@ -45,4 +45,9 @@ export const NOSSOS_PRODUTOS = [
     desc: "Cuidado com pessoas e células",
     atual: true,
   },
+  {
+    nome: "PREDETI PLAY",
+    url: "https://play.predeti.com.br",
+    desc: "Plataforma de cursos e treinamentos",
+  },
 ];

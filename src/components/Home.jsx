@@ -441,14 +441,15 @@ function NossosProdutos() {
         <Reveal className="mx-auto max-w-3xl text-center">
           <span className="eyebrow">Ecossistema PREDETI</span>
           <h2 className="h-display mt-4 text-[clamp(28px,4vw,48px)] leading-[1.08]">Nossos produtos</h2>
-          <p className="mx-auto mt-4 max-w-xl text-[16.5px] text-muted">
+          <p className="mx-auto mt-4 max-w-2xl text-[16.5px] text-muted">
             Conheça as plataformas conectadas ao ecossistema{" "}
             <a href="https://erp.predeti.com.br/" className="font-medium text-ink underline-offset-4 hover:underline">PREDETI ERP</a>,{" "}
-            <a href="https://atosdesk.predeti.com.br" className="font-medium text-ink underline-offset-4 hover:underline">ATOS DESK</a> e{" "}
-            <a href="https://atoshub.predeti.com.br/" className="font-medium text-ink underline-offset-4 hover:underline">ATOS HUB</a>.
+            <a href="https://atosdesk.predeti.com.br" className="font-medium text-ink underline-offset-4 hover:underline">ATOS DESK</a>,{" "}
+            <a href="https://atoshub.predeti.com.br/" className="font-medium text-ink underline-offset-4 hover:underline">ATOS HUB</a> e{" "}
+            <a href="https://play.predeti.com.br" className="font-medium text-ink underline-offset-4 hover:underline">PREDETI PLAY</a>.
           </p>
         </Reveal>
-        <div className="mt-10 grid gap-4 md:grid-cols-3">
+        <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
           {NOSSOS_PRODUTOS.map((p, k) => (
             <Reveal key={p.nome} delay={k * 0.06}>
               <motion.a

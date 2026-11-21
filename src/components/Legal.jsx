@@ -204,7 +204,7 @@ export function LegalModal({ tab, onClose, onChangeTab }) {
                 <section className="grid gap-2">
                   <h3 className="text-[17px] font-medium text-ink">1. Compromisso com a Privacidade e a LGPD</h3>
                   <p>
-                    A <strong className="font-medium text-ink">{EMPRESA_LEGAL.razaoSocial}</strong>, inscrita no CNPJ sob o nº <strong className="font-medium text-ink">{EMPRESA_LEGAL.cnpj}</strong>, detentora das plataformas <strong className="font-medium text-ink">ATOS HUB</strong>, <strong className="font-medium text-ink">ATOS DESK</strong> e <strong className="font-medium text-ink">PREDETI ERP</strong>, atua em estrita conformidade com a <strong className="font-medium text-ink">Lei Geral de Proteção de Dados Pessoais (Lei nº 13.709/2018 — LGPD)</strong> e com o Marco Civil da Internet (Lei nº 12.965/2014).
+                    A <strong className="font-medium text-ink">{EMPRESA_LEGAL.razaoSocial}</strong>, inscrita no CNPJ sob o nº <strong className="font-medium text-ink">{EMPRESA_LEGAL.cnpj}</strong>, detentora das plataformas <strong className="font-medium text-ink">ATOS HUB</strong>, <strong className="font-medium text-ink">ATOS DESK</strong>, <strong className="font-medium text-ink">PREDETI ERP</strong> e <strong className="font-medium text-ink">PREDETI PLAY</strong>, atua em estrita conformidade com a <strong className="font-medium text-ink">Lei Geral de Proteção de Dados Pessoais (Lei nº 13.709/2018 — LGPD)</strong> e com o Marco Civil da Internet (Lei nº 12.965/2014).
                   </p>
                 </section>
 
@@ -292,7 +292,7 @@ export function LegalModal({ tab, onClose, onChangeTab }) {
                 <section className="grid gap-2">
                   <h3 className="text-[17px] font-medium text-ink">2. Propriedade Intelectual</h3>
                   <p>
-                    Todos os direitos relativos às marcas <strong className="font-medium text-ink">ATOS HUB</strong>, <strong className="font-medium text-ink">ATOS DESK</strong> e <strong className="font-medium text-ink">PREDETI ERP</strong>, bem como logotipos, código-fonte, layout, textos e simulações interativas exibidas neste site são de titularidade exclusiva da <strong className="font-medium text-ink">{EMPRESA_LEGAL.razaoSocial} (CNPJ {EMPRESA_LEGAL.cnpj})</strong>, protegidos pelas Leis nº 9.609/1998 (Lei do Software), nº 9.610/1998 (Direitos Autorais) e nº 9.279/1996 (Propriedade Industrial).
+                    Todos os direitos relativos às marcas <strong className="font-medium text-ink">ATOS HUB</strong>, <strong className="font-medium text-ink">ATOS DESK</strong>, <strong className="font-medium text-ink">PREDETI ERP</strong> e <strong className="font-medium text-ink">PREDETI PLAY</strong>, bem como logotipos, código-fonte, layout, textos e simulações interativas exibidas neste site são de titularidade exclusiva da <strong className="font-medium text-ink">{EMPRESA_LEGAL.razaoSocial} (CNPJ {EMPRESA_LEGAL.cnpj})</strong>, protegidos pelas Leis nº 9.609/1998 (Lei do Software), nº 9.610/1998 (Direitos Autorais) e nº 9.279/1996 (Propriedade Industrial).
                   </p>
                 </section>
 
