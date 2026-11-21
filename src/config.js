@@ -24,11 +24,14 @@ export const EMPRESA_LEGAL = {
   atualizacao: "Novembro de 2026",
 };
 
-// Ecossistema de produtos
+// Site principal da marca Predeti
+export const SITE_PREDETI_URL = "https://predeti.com.br";
+
+// Ecossistema de produtos (abrem sempre na mesma aba)
 export const NOSSOS_PRODUTOS = [
   {
     nome: "PREDETI ERP",
-    url: "https://predeti.com.br",
+    url: "https://erp.predeti.com.br/",
     desc: "Gestão administrativa e financeira",
   },
   {
@@ -38,7 +41,7 @@ export const NOSSOS_PRODUTOS = [
   },
   {
     nome: "ATOS HUB",
-    url: "https://atoshub.predeti.com.br",
+    url: "https://atoshub.predeti.com.br/",
     desc: "Cuidado com pessoas e células",
     atual: true,
   },

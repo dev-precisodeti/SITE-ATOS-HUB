@@ -4,7 +4,7 @@
 **Razão Social:** PRECISO DE TI SERVICOS DE CLOUD E SISTEMAS LTDA  
 **CNPJ:** 65.763.438/0001-77  
 **Site Oficial:** https://atoshub.predeti.com.br  
-**Ecossistema:** PREDETI ERP (https://predeti.com.br) · ATOS DESK (https://atosdesk.predeti.com.br) · ATOS HUB (https://atoshub.predeti.com.br)  
+**Ecossistema:** Predeti (https://predeti.com.br) · PREDETI ERP (https://erp.predeti.com.br/) · ATOS DESK (https://atosdesk.predeti.com.br) · ATOS HUB (https://atoshub.predeti.com.br/)  
 **Canal de Privacidade / Encarregado de Dados (DPO):** contato@precisodeti.com.br · WhatsApp: (21) 99985-4271
 
 ---

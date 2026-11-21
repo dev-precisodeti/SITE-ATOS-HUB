@@ -4,10 +4,10 @@ import Particles from "./Particles.jsx";
 import { AppWindow, GuardiaoSim, CelulasLiveSim, VisitanteSim, Mini } from "./Sims.jsx";
 import { VoluntariadoSim } from "./VoluntariadoSim.jsx";
 import { CheckinCelulaSim } from "./CheckinCelulaSim.jsx";
-import { Arrow, Icons, MediaSlot, Reveal, LogoMark, WhatsIcon, waLink } from "./UI.jsx";
+import { Arrow, Icons, MediaSlot, Reveal, LogoMark, PredetiLogo, WhatsIcon, waLink } from "./UI.jsx";
 import { PerfilDashboard } from "./PerfisViews.jsx";
 import { PILARES_CARTOES, PERFIS, PROTECAO } from "../data.js";
-import { WHATSAPP_VENDAS, NOSSOS_PRODUTOS, EMPRESA_LEGAL } from "../config.js";
+import { WHATSAPP_VENDAS, NOSSOS_PRODUTOS, SITE_PREDETI_URL, EMPRESA_LEGAL } from "../config.js";
 
 /* ================= HERÓI ================= */
 function Hero() {
@@ -15,11 +15,17 @@ function Hero() {
     <section className="relative overflow-hidden pb-10 pt-36 md:pt-44">
       <Particles />
       <div className="relative mx-auto max-w-5xl px-5 text-center">
-        <motion.a href="https://atoshub.predeti.com.br" initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}
-          className="mx-auto mb-6 inline-flex items-center gap-2 text-[15px] text-muted transition hover:text-ink">
-          <LogoMark className="h-6 w-6" />
-          ATOS HUB
-        </motion.a>
+        <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}
+          className="mx-auto mb-6 flex flex-wrap items-center justify-center gap-2.5">
+          <a href={SITE_PREDETI_URL} className="inline-flex items-center gap-2 rounded-full bg-surface px-3.5 py-1.5 text-[13px] font-medium text-muted ring-1 ring-line transition hover:bg-white hover:text-ink">
+            <span>← Voltar à</span>
+            <PredetiLogo className="h-4 w-auto" />
+          </a>
+          <a href="https://atoshub.predeti.com.br/" className="inline-flex items-center gap-2 rounded-full bg-white px-3.5 py-1.5 text-[14px] font-medium text-ink ring-1 ring-line transition hover:bg-surface">
+            <LogoMark className="h-5 w-5" />
+            ATOS HUB
+          </a>
+        </motion.div>
         <motion.h1 initial={{ opacity: 0, y: 24, filter: "blur(8px)" }} animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
           transition={{ duration: 0.9, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
           className="h-display text-[clamp(38px,6.4vw,76px)] leading-[1.04]">
@@ -27,7 +33,7 @@ function Hero() {
         </motion.h1>
         <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.45, duration: 0.8 }}
           className="mx-auto mt-6 max-w-2xl text-[18px] leading-relaxed text-muted">
-          <a href="https://atoshub.predeti.com.br" className="font-medium text-ink underline-offset-4 hover:underline">Atos Hub</a> é o sistema de cuidado com pessoas para igrejas em células. Você acompanha cada membro, cada visitante e cada voluntário em um só lugar, do primeiro contato à vida em comunidade.
+          <a href="https://atoshub.predeti.com.br/" className="font-medium text-ink underline-offset-4 hover:underline">Atos Hub</a> é o sistema de cuidado com pessoas para igrejas em células. Você acompanha cada membro, cada visitante e cada voluntário em um só lugar, do primeiro contato à vida em comunidade.
         </motion.p>
         <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.6, duration: 0.7 }}
           className="mx-auto mt-10 inline-flex flex-col items-center gap-4 rounded-3xl bg-white/70 p-3 ring-1 ring-line backdrop-blur sm:flex-row">
@@ -435,7 +441,12 @@ function NossosProdutos() {
         <Reveal className="mx-auto max-w-3xl text-center">
           <span className="eyebrow">Ecossistema PREDETI</span>
           <h2 className="h-display mt-4 text-[clamp(28px,4vw,48px)] leading-[1.08]">Nossos produtos</h2>
-          <p className="mx-auto mt-4 max-w-xl text-[16.5px] text-muted">Conheça as plataformas conectadas ao ecossistema <a href="https://predeti.com.br" target="_blank" rel="noopener noreferrer" className="font-medium text-ink underline-offset-4 hover:underline">PREDETI ERP</a>, <a href="https://atosdesk.predeti.com.br" target="_blank" rel="noopener noreferrer" className="font-medium text-ink underline-offset-4 hover:underline">ATOS DESK</a> e <a href="https://atoshub.predeti.com.br" className="font-medium text-ink underline-offset-4 hover:underline">ATOS HUB</a>.</p>
+          <p className="mx-auto mt-4 max-w-xl text-[16.5px] text-muted">
+            Conheça as plataformas conectadas ao ecossistema{" "}
+            <a href="https://erp.predeti.com.br/" className="font-medium text-ink underline-offset-4 hover:underline">PREDETI ERP</a>,{" "}
+            <a href="https://atosdesk.predeti.com.br" className="font-medium text-ink underline-offset-4 hover:underline">ATOS DESK</a> e{" "}
+            <a href="https://atoshub.predeti.com.br/" className="font-medium text-ink underline-offset-4 hover:underline">ATOS HUB</a>.
+          </p>
         </Reveal>
         <div className="mt-10 grid gap-4 md:grid-cols-3">
           {NOSSOS_PRODUTOS.map((p, k) => (
@@ -443,8 +454,6 @@ function NossosProdutos() {
               <motion.a
                 whileHover={{ y: -4 }}
                 href={p.url}
-                target={p.atual ? "_self" : "_blank"}
-                rel="noopener noreferrer"
                 className="group flex h-full flex-col justify-between rounded-3xl bg-surface p-6 ring-1 ring-line transition hover:bg-white hover:shadow-[0_20px_50px_-24px_rgba(18,19,23,.3)]"
               >
                 <div>
@@ -455,13 +464,30 @@ function NossosProdutos() {
                   <p className="mt-2 text-[15px] leading-relaxed text-muted">{p.desc}</p>
                 </div>
                 <span className="mt-6 inline-flex items-center gap-1.5 text-[14px] font-medium text-ink">
-                  {p.url.replace(/^https?:\/\//, "")}
+                  {p.url.replace(/^https?:\/\//, "").replace(/\/$/, "")}
                   <Arrow className="h-4 w-4 transition group-hover:translate-x-1" />
                 </span>
               </motion.a>
             </Reveal>
           ))}
         </div>
+        <Reveal delay={0.18} className="mt-6">
+          <a
+            href={SITE_PREDETI_URL}
+            className="group flex flex-wrap items-center justify-between gap-4 rounded-3xl bg-ink px-6 py-5 text-white transition hover:bg-ink/95 sm:px-8"
+          >
+            <div className="flex flex-wrap items-center gap-4">
+              <PredetiLogo dark className="h-6 w-auto" />
+              <span className="hidden h-5 w-px bg-white/15 sm:inline-block" aria-hidden="true" />
+              <span className="text-[14.5px] text-white/80">
+                Conheça todas as soluções no site principal da marca <strong className="font-medium text-white">predeti.com.br</strong>
+              </span>
+            </div>
+            <span className="inline-flex items-center gap-2 rounded-full bg-white/10 px-4 py-2 text-[13.5px] font-medium text-white ring-1 ring-white/15 transition group-hover:bg-white group-hover:text-ink">
+              ← Voltar à Predeti
+            </span>
+          </a>
+        </Reveal>
       </div>
     </section>
   );

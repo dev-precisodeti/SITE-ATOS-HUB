@@ -2,8 +2,8 @@ import { useEffect, useRef, useState } from "react";
 import { motion, AnimatePresence, useScroll, useMotionValueEvent } from "framer-motion";
 import Home from "./components/Home.jsx";
 import { LegalModal, LgpdBanner } from "./components/Legal.jsx";
-import { Logo, Arrow, WhatsIcon, waLink } from "./components/UI.jsx";
-import { WHATSAPP_EXIBIDO, NOSSOS_PRODUTOS, EMPRESA_LEGAL } from "./config.js";
+import { Logo, PredetiLogo, Arrow, WhatsIcon, waLink } from "./components/UI.jsx";
+import { WHATSAPP_EXIBIDO, NOSSOS_PRODUTOS, SITE_PREDETI_URL, EMPRESA_LEGAL } from "./config.js";
 
 /* Links com #id rolam até a seção; #inicio volta ao topo; #privacidade, #termos e #lgpd abrem o modal legal. */
 function useHashScroll(onOpenLegal) {
@@ -68,11 +68,16 @@ function Nav() {
     <header className="fixed inset-x-0 top-0 z-50 w-full max-w-full">
       <AnimatePresence>
         {!solid && (
-          <motion.div initial={{ height: 0 }} animate={{ height: "auto" }} exit={{ height: 0 }} className="overflow-hidden border-b border-line bg-surface/80 backdrop-blur w-full">
-            <a href="#celulas" className="flex items-center justify-center gap-2 sm:gap-3 px-3 sm:px-4 py-2 text-[12px] sm:text-[13px] max-w-full overflow-hidden">
-              <span className="rounded-full bg-ink px-2 py-0.5 text-[10px] sm:text-[10.5px] font-medium uppercase tracking-wide text-white flex-none">Novo</span>
-              <span className="truncate text-muted min-w-0">Células ao vivo: acompanhe a presença no momento em que os encontros acontecem</span>
-              <span className="hidden font-medium sm:inline flex-none">Conhecer →</span>
+          <motion.div initial={{ height: 0 }} animate={{ height: "auto" }} exit={{ height: 0 }} className="overflow-hidden border-b border-line bg-surface/90 backdrop-blur w-full">
+            <a href={SITE_PREDETI_URL} className="group flex items-center justify-center gap-2.5 sm:gap-3 px-3 sm:px-4 py-2 text-[12px] sm:text-[13px] max-w-full overflow-hidden transition hover:bg-surface">
+              <PredetiLogo className="h-[18px] sm:h-5 w-auto flex-none" />
+              <span className="h-3.5 w-px bg-line flex-none" aria-hidden="true" />
+              <span className="truncate text-muted min-w-0">
+                Uma solução do ecossistema <strong className="font-medium text-ink">Predeti</strong> · Site principal da marca
+              </span>
+              <span className="inline-flex items-center gap-1 font-medium text-ink flex-none transition group-hover:translate-x-0.5">
+                Voltar à Predeti →
+              </span>
             </a>
           </motion.div>
         )}
@@ -108,12 +113,21 @@ function Nav() {
                     className="absolute right-0 top-full z-50 w-72 pt-2"
                   >
                     <div className="overflow-hidden rounded-2xl bg-white p-2 shadow-[0_20px_50px_-15px_rgba(18,19,23,.22)] ring-1 ring-line">
+                      <a
+                        href={SITE_PREDETI_URL}
+                        onClick={() => setProdOpen(false)}
+                        className="group mb-1 flex items-center justify-between gap-3 rounded-xl border-b border-line/70 bg-surface/60 px-3.5 py-2.5 transition hover:bg-surface"
+                      >
+                        <div>
+                          <PredetiLogo className="h-4 w-auto" />
+                          <div className="mt-0.5 text-[11.5px] text-muted">Voltar ao site principal da marca</div>
+                        </div>
+                        <Arrow className="h-3.5 w-3.5 flex-none text-muted transition group-hover:translate-x-0.5 group-hover:text-ink" />
+                      </a>
                       {NOSSOS_PRODUTOS.map((p) => (
                         <a
                           key={p.nome}
                           href={p.url}
-                          target={p.atual ? "_self" : "_blank"}
-                          rel="noopener noreferrer"
                           onClick={() => setProdOpen(false)}
                           className="group flex items-center justify-between gap-3 rounded-xl px-3.5 py-2.5 transition hover:bg-surface"
                         >
@@ -171,12 +185,21 @@ function Nav() {
                         exit={{ height: 0, opacity: 0 }}
                         className="grid gap-1 overflow-hidden pt-1"
                       >
+                        <a
+                          href={SITE_PREDETI_URL}
+                          onClick={() => setMenu(false)}
+                          className="flex items-center justify-between rounded-xl bg-white px-3.5 py-2.5 text-[14.5px] ring-1 ring-line/60 transition hover:bg-surface"
+                        >
+                          <div>
+                            <PredetiLogo className="h-4 w-auto" />
+                            <span className="mt-0.5 block text-[12px] text-muted">Voltar ao site principal da marca</span>
+                          </div>
+                          <Arrow className="h-3.5 w-3.5 text-muted" />
+                        </a>
                         {NOSSOS_PRODUTOS.map((p) => (
                           <a
                             key={p.nome}
                             href={p.url}
-                            target={p.atual ? "_self" : "_blank"}
-                            rel="noopener noreferrer"
                             onClick={() => setMenu(false)}
                             className="flex items-center justify-between rounded-xl bg-white px-3.5 py-2.5 text-[14.5px] ring-1 ring-line/60 transition hover:bg-surface"
                           >
@@ -232,15 +255,15 @@ function Footer({ onOpenLegal }) {
         {[
           ["Pilares", [["Cuidado", "#cuidado"], ["Células", "#celulas"], ["Voluntariado", "#voluntariado"], ["Novos visitantes", "#visitantes"]]],
           ["Igreja", [["Para quem é", "#para-quem"], ["Segurança e LGPD", "#seguranca"]]],
-          ["ATOS HUB", [["Início", "#inicio"], ["Demonstração", "#demonstracao"]]],
-          ["Nossos produtos", NOSSOS_PRODUTOS.map((p) => [p.nome, p.url, !p.atual])],
+          ["ATOS HUB", [["Início", "#inicio"], ["Demonstração", "#demonstracao"], ["Voltar à Predeti", SITE_PREDETI_URL]]],
+          ["Nossos produtos", [["Site Principal Predeti", SITE_PREDETI_URL], ...NOSSOS_PRODUTOS.map((p) => [p.nome, p.url])]],
         ].map(([t, ls]) => (
           <div key={t}>
             <div className="text-[13px] font-medium">{t}</div>
             <ul className="mt-3 grid gap-2 text-[14.5px] text-muted">
-              {ls.map(([l, h, ext]) => (
+              {ls.map(([l, h]) => (
                 <li key={l}>
-                  <a href={h} {...(ext ? { target: "_blank", rel: "noopener noreferrer" } : {})} className="hover:text-ink">
+                  <a href={h} className="hover:text-ink">
                     {l}
                   </a>
                 </li>
@@ -293,10 +316,19 @@ function Footer({ onOpenLegal }) {
       </div>
 
       <div className="mx-auto mt-8 flex max-w-7xl flex-wrap items-center justify-between gap-4 px-5 text-[13px] text-muted">
-        <span>© {new Date().getFullYear()} <a href="https://atoshub.predeti.com.br" className="hover:text-ink">ATOS HUB</a> · Soluções <a href="https://predeti.com.br" target="_blank" rel="noopener noreferrer" className="hover:text-ink">PREDETI ERP</a> · Ninguém fica para trás.</span>
+        <span className="flex flex-wrap items-center gap-2">
+          <span>© {new Date().getFullYear()} <a href="https://atoshub.predeti.com.br/" className="hover:text-ink">ATOS HUB</a> · Uma solução</span>
+          <a href={SITE_PREDETI_URL} className="inline-flex items-center hover:opacity-80" aria-label="Voltar à Predeti">
+            <PredetiLogo className="h-4 w-auto" />
+          </a>
+          <span>· Ninguém fica para trás.</span>
+        </span>
         <div className="flex flex-wrap items-center gap-4">
+          <a href={SITE_PREDETI_URL} className="font-medium text-ink hover:underline">
+            ← Voltar à Predeti
+          </a>
           {NOSSOS_PRODUTOS.map((p) => (
-            <a key={p.nome} href={p.url} target={p.atual ? "_self" : "_blank"} rel="noopener noreferrer" className="font-medium hover:text-ink">
+            <a key={p.nome} href={p.url} className="font-medium hover:text-ink">
               {p.nome}
             </a>
           ))}
